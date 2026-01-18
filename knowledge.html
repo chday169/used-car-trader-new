@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>車主知識庫 - 漢新二手車</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* 知識庫專用樣式 */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+    
+    header {
+      background: #333;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    header h1 {
+      margin: 0;
+      font-size: 2em;
+    }
+    
+    nav {
+      margin-top: 15px;
+    }
+    
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 10px;
+      font-weight: bold;
+    }
+    
+    nav a:hover {
+      text-decoration: underline;
+    }
+    
+    main {
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    section {
+      margin: 30px 0;
+    }
+    
+    h2 {
+      color: #333;
+      border-bottom: 2px solid #007bff;
+      padding-bottom: 10px;
+    }
+    
+    h3 {
+      color: #007bff;
+      margin-top: 20px;
+    }
+    
+    /* 知識庫類別樣式 */
+    .knowledge-category {
+      margin: 30px 0;
+      padding: 20px;
+      background: #f8f9fa;
+      border-radius: 8px;
+    }
+    
+    .article-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    
+    .knowledge-card {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .tech-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+    }
+    
+    .tech-table th, .tech-table td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+    }
+    
+    .tech-table th {
+      background: #f2f2f2;
+    }
+    
+    .website-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 15px;
+    }
+    
+    .website-card {
+      border: 1px solid #e0e0e0;
+      padding: 15px;
+      border-radius: 6px;
+      background: white;
+    }
+    
+    .website-card h4 {
+      margin-top: 0;
+      color: #007bff;
+    }
+    
+    /* 安全提示樣式 */
+    .safety-tips {
+      display: grid;
+      gap: 15px;
+    }
+    
+    .tip {
+      padding: 15px;
+      background: #e8f4fd;
+      border-radius: 6px;
+      border-left: 4px solid #17a2b8;
+    }
+    
+    .tip h4 {
+      margin-top: 0;
+      color: #17a2b8;
+    }
+    
+    /* 注意事項框 */
+    .note-box {
+      background: #fff3cd;
+      border: 1px solid #ffeaa7;
+      border-radius: 6px;
+      padding: 15px;
+      margin: 20px 0;
+    }
+    
+    .note-box h4 {
+      color: #856404;
+      margin-top: 0;
+    }
+    
+    /* 返回按鈕 */
+    .back-button {
+      display: inline-block;
+      background: #6c757d;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: bold;
+      transition: background 0.3s;
+      margin-top: 20px;
+    }
+    
+    .back-button:hover {
+      background: #545b62;
+    }
+    
+    /* 響應式設計 */
+    @media (max-width: 768px) {
+      .article-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .website-links {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    /* 頁尾樣式 */
+    footer {
+      background: #333;
+      color: white;
+      margin-top: 40px;
+      text-align: center;
+      padding: 20px;
+    }
+    
+    footer p {
+      margin: 5px 0;
+    }
+    
+    .footer-links {
+      margin-top: 15px;
+    }
+    
+    .footer-links a {
+      color: #ddd;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+    
+    .footer-links a:hover {
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>車主實用知識庫</h1>
+    <nav>
+      <a href="index.html"><i class="fas fa-home"></i> 首頁</a> |
+      <a href="cars.html"><i class="fas fa-car"></i> 車輛列表</a> |
+      <a href="knowledge.html"><i class="fas fa-book"></i> 知識庫</a> |
+      <a href="contact.html"><i class="fas fa-phone"></i> 聯絡我們</a> |
+      <a href="partners.html"><i class="fas fa-handshake"></i> 協力廠商</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- 保養常識區塊 -->
+    <section class="knowledge-category" id="maintenance">
+      <h2><i class="fas fa-tools"></i> 車輛保養常識</h2>
+      <div class="article-grid">
+        <article class="knowledge-card">
+          <h3>定期保養五大要點</h3>
+          <ul>
+            <li><strong>機油更換：</strong>每5,000-10,000公里或6個月更換一次</li>
+            <li><strong>輪胎檢查：</strong>每月檢查胎壓，注意胎紋深度（不低於1.6mm）</li>
+            <li><strong>煞車系統：</strong>注意煞車片厚度和煞車油狀態</li>
+            <li><strong>電瓶保養：</strong>保持端子清潔，避免完全放電</li>
+            <li><strong>濾清器更換：</strong>空氣濾清器、空調濾清器定期更換</li>
+          </ul>
+          <div class="note-box">
+            <h4><i class="fas fa-lightbulb"></i> 重要提醒</h4>
+            <p>定期保養不僅能延長車輛壽命，還能確保行車安全。建議按照原廠保養手冊進行定期檢查。</p>
+          </div>
+        </article>
+
+        <article class="knowledge-card">
+          <h3>二手車購入後必做檢查</h3>
+          <p>購買二手車後，建議進行以下檢查以確保車況：</p>
+          <ol>
+            <li>全車油液更換（機油、變速箱油、煞車油、冷卻液）</li>
+            <li>檢查所有皮帶和軟管</li>
+            <li>底盤與懸吊系統檢查</li>
+            <li>電氣系統測試（燈光、空調、音響等）</li>
+            <li>四輪定位與動平衡</li>
+          </ol>
+        </article>
+
+        <article class="knowledge-card">
+          <h3>季節性保養重點</h3>
+          <h4>夏季保養</h4>
+          <ul>
+            <li>冷卻系統檢查與水箱清潔</li>
+            <li>冷氣系統效能檢測</li>
+            <li>輪胎胎壓調整（避免過高）</li>
+            <li>雨刷檢查與更換</li>
+          </ul>
+          
+          <h4>冬季保養</h4>
+          <ul>
+            <li>電瓶效能測試</li>
+            <li>雨刷水添加防凍劑</li>
+            <li>暖氣系統檢查</li>
+            <li>輪胎檢查（考慮使用雪地胎）</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- 駕駛安全規則（合併高速公路注意事項） -->
+    <section class="knowledge-category" id="safety">
+      <h2><i class="fas fa-shield-alt"></i> 汽車駕駛安全規則</h2>
+      <div class="article-grid">
+        <article class="knowledge-card">
+          <h3>高速公路駕駛安全守則</h3>
+          <div class="safety-tips">
+            <div class="tip">
+              <h4><i class="fas fa-car"></i> 行車前檢查</h4>
+              <p>檢查胎壓、油量、燈光、煞車，確保車輛狀態良好。長途行駛前建議進行專業檢查。</p>
+            </div>
+            <div class="tip">
+              <h4><i class="fas fa-route"></i> 車道使用規則</h4>
+              <p>內側車道為超車道，超車後應返回原車道；大車應使用外側車道。保持右側行駛，左側超車原則。</p>
+            </div>
+            <div class="tip">
+              <h4><i class="fas fa-road"></i> 安全距離保持</h4>
+              <p>時速100公里時，至少保持50公尺車距；雨天加倍。使用「三秒法則」確保安全距離。</p>
+            </div>
+            <div class="tip">
+              <h4><i class="fas fa-ban"></i> 禁止行為</h4>
+              <p>嚴禁疲勞駕駛、隨意變換車道、路肩超車、倒車或迴轉。酒精濃度超過標準嚴禁駕車。</p>
+            </div>
+            <div class="tip">
+              <h4><i class="fas fa-exclamation-triangle"></i> 特殊情況處理</h4>
+              <p>遇事故：開啟危險警告燈→放置三角警告標誌→退至安全處→撥打110或1968求助。</p>
+            </div>
+          </div>
+          <p><a href="safety002.html" class="back-button">查看完整高速公路指南 →</a></p>
+        </article>
+
+        <article class="knowledge-card">
+          <h3>防禦性駕駛要點</h3>
+          <ul>
+            <li><strong>保持視線：</strong>眼觀四方，注意前方3-5輛車的動態，觀察後視鏡每5-8秒</li>
+            <li><strong>預測風險：</strong>預判其他駕駛可能的不當行為，特別注意路口與變換車道</li>
+            <li><strong>保持空間：</strong>前後左右保持安全緩衝空間，避免並排行駛</li>
+            <li><strong>專注駕駛：</strong>避免使用手機、飲食等分心行為，保持雙手在方向盤上</li>
+            <li><strong>禮讓原則：</strong>禮讓行人、優先讓行救護車輛，不爭道搶行</li>
+          </ul>
+        </article>
+
+        <article class="knowledge-card">
+          <h3>特殊天氣駕駛要點</h3>
+          <ul>
+            <li><strong>雨天：</strong>減速30%，開啟頭燈，避免急煞，注意水漂現象。雨勢過大時應停靠安全處</li>
+            <li><strong>霧天：</strong>使用霧燈（非遠光燈），保持低速，沿車道線行駛，必要時開啟危險燈</li>
+            <li><strong>夜間：</strong>合理使用遠近光燈，注意行人及動物，增加跟車距離，定期清潔燈罩</li>
+            <li><strong>山區：</strong>下坡用低速檔，轉彎鳴喇叭，注意落石，避免空檔滑行</li>
+            <li><strong>強風：</strong>緊握方向盤，減速慢行，特別注意高架橋與空曠路段</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- 高速公路專區 -->
+    <section class="knowledge-category">
+      <h2><i class="fas fa-road"></i> 高速公路駕駛應注意事項</h2>
+      <div class="knowledge-card">
+        <h3>台灣高速公路行車須知</h3>
+        <h4>速限規定</h4>
+        <ul>
+          <li>一般路段：小型車100-110km/h，大型車80-90km/h</li>
+          <li>特殊路段：依標誌指示，施工路段通常降為60-80km/h</li>
+          <li>雨天建議：降低車速20-30%</li>
+        </ul>
+        
+        <h4>收費與ETC</h4>
+        <ul>
+          <li>全線電子收費（ETC），無人工收費站</li>
+          <li>小型車費率每公里約1.2元</li>
+          <li>未裝eTag可事後補繳，逾期有罰款</li>
+        </ul>
+        
+        <h4>服務區與休息站</h4>
+        <ul>
+          <li>每隔約50公里設有服務區</li>
+          <li>建議每駕駛2小時休息15分鐘</li>
+          <li>主要服務區：關西、西湖、清水、南投等</li>
+        </ul>
+        
+        <h4>高乘載管制</h4>
+        <ul>
+          <li>連續假期特定時段實施</li>
+          <li>小型車需乘載3人以上（含駕駛）</li>
+          <li>管制時間前會提前公告</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 汽車新科技 -->
+    <section class="knowledge-category" id="technology">
+      <h2><i class="fas fa-microchip"></i> 國內外汽車新科技介紹</h2>
+      <div class="article-grid">
+        <article class="knowledge-card">
+          <h3>ADAS 先進駕駛輔助系統</h3>
+          <table class="tech-table">
+            <tr>
+              <th>系統名稱</th>
+              <th>功能說明</th>
+              <th>常見車型</th>
+            </tr>
+            <tr>
+              <td>ACC 主動式巡航</td>
+              <td>自動保持與前車距離，調整車速</td>
+              <td>Toyota RAV4, Honda CR-V</td>
+            </tr>
+            <tr>
+              <td>AEB 自動緊急煞車</td>
+              <td>偵測前方障礙，自動煞車避免碰撞</td>
+              <td>Mazda CX-5, Nissan X-Trail</td>
+            </tr>
+            <tr>
+              <td>LDW 車道偏移警示</td>
+              <td>偵測車道線，提醒駕駛維持車道</td>
+              <td>Ford Focus, Volkswagen Golf</td>
+            </tr>
+            <tr>
+              <td>BSM 盲點偵測</td>
+              <td>監測車輛盲區，變換車道時警示</td>
+              <td>Hyundai Tucson, Kia Sportage</td>
+            </tr>
+            <tr>
+              <td>360度環景影像</td>
+              <td>提供車輛四周鳥瞰視圖，方便停車</td>
+              <td>Luxgen URX, Toyota Alphard</td>
+            </tr>
+          </table>
+        </article>
+
+        <article class="knowledge-card">
+          <h3>新能源車技術發展</h3>
+          <h4>電動車 (EV)</h4>
+          <ul>
+            <li>續航里程：主流車型已達400-600公里</li>
+            <li>充電技術：快充30分鐘可達80%電量</li>
+            <li>代表車款：Tesla Model 3, Nissan Leaf</li>
+            <li>政府補助：台灣有電動車購車補助及免稅優惠</li>
+          </ul>
+          
+          <h4>油電混合車 (HEV/PHEV)</h4>
+          <ul>
+            <li>油耗表現：較傳統汽油車節省30-50%</li>
+            <li>純電行駛：PHEV車型可純電行駛50-80公里</li>
+            <li>代表車款：Toyota Prius, Mitsubishi Outlander PHEV</li>
+            <li>優勢：無里程焦慮，適合台灣使用環境</li>
+          </ul>
+          
+          <h4>氫燃料電池車 (FCEV)</h4>
+          <ul>
+            <li>加氫時間：約3-5分鐘</li>
+            <li>行駛里程：超過600公里</li>
+            <li>代表車款：Toyota Mirai, Hyundai Nexo</li>
+            <li>現況：台灣加氫站尚在建設中</li>
+          </ul>
+        </article>
+
+        <article class="knowledge-card">
+          <h3>車聯網與智慧座艙</h3>
+          <ul>
+            <li><strong>V2X車聯網：</strong>車輛與基礎設施通訊，預警交通狀況</li>
+            <li><strong>數位儀表板：</strong>全液晶顯示，自定義資訊佈局</li>
+            <li><strong>抬頭顯示器：</strong>投影行車資訊於擋風玻璃</li>
+            <li><strong>智慧語音助理：</strong>聲控操作多媒體、導航、空調</li>
+            <li><strong>OTA線上更新：</strong>無線更新系統軟體與地圖</li>
+            <li><strong>生物辨識：</strong>臉部辨識啟動車輛，疲勞駕駛偵測</li>
+          </ul>
+          <div class="note-box">
+            <h4><i class="fas fa-chart-line"></i> 發展趨勢</h4>
+            <p>自動駕駛等級正從L2向L3邁進，預計2025年更多車款將具備有條件的自動駕駛功能。台灣也積極發展自駕車測試場域。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 國內外汽車網站連結 -->
+    <section class="knowledge-category" id="resources">
+      <h2><i class="fas fa-link"></i> 汽車資訊網站推薦</h2>
+      <div class="website-links">
+        <div class="website-card">
+          <h4>台灣網站</h4>
+          <ul>
+            <li><a href="https://www.mobile01.com/auto" target="_blank">Mobile01汽車版</a> - 車主討論區</li>
+            <li><a href="https://autos.yahoo.com.tw/" target="_blank">Yahoo奇摩汽車</a> - 新聞與試駕報導</li>
+            <li><a href="https://www.7car.tw/" target="_blank">七汽車網</a> - 台灣汽車資訊</li>
+            <li><a href="https://www.carnews.com/" target="_blank">車訊網</a> - 專業汽車媒體</li>
+            <li><a href="https://motor.u-car.com.tw/" target="_blank">U-CAR</a> - 新車與二手車資訊</li>
+          </ul>
+        </div>
+        
+        <div class="website-card">
+          <h4>國際網站</h4>
+          <ul>
+            <li><a href="https://www.caranddriver.com/" target="_blank">Car and Driver</a> - 專業評測</li>
+            <li><a href="https://www.motortrend.com/" target="_blank">Motor Trend</a> - 汽車趨勢</li>
+            <li><a href="https://www.topgear.com/" target="_blank">Top Gear</a> - 英國汽車媒體</li>
+            <li><a href="https://www.edmunds.com/" target="_blank">Edmunds</a> - 美國購車指南</li>
+            <li><a href="https://www.kbb.com/" target="_blank">Kelley Blue Book</a> - 車輛估價權威</li>
+          </ul>
+        </div>
+        
+        <div class="website-card">
+          <h4>實用工具網站</h4>
+          <ul>
+            <li><a href="external_gasbuddy.html">GasBuddy</a> - 油價查詢</li>
+            <li><a href="external_twmaintain.html">台灣汽車維修指南</a></li>
+            <li><a href="https://www.fueleconomy.gov/" target="_blank">Fuel Economy</a> - 油耗資訊</li>
+            <li><a href="https://www.nhtsa.gov/" target="_blank">NHTSA</a> - 安全評級</li>
+            <li><a href="https://www.iihs.org/" target="_blank">IIHS</a> - 撞擊測試結果</li>
+          </ul>
+        </div>
+        
+        <div class="website-card">
+          <h4>台灣政府資源</h4>
+          <ul>
+            <li><a href="https://www.mvdis.gov.tw/" target="_blank">監理服務網</a> - 牌照、駕照業務</li>
+            <li><a href="https://www.artc.org.tw/" target="_blank">車輛安全審驗中心</a></li>
+            <li><a href="https://www.car-safety.org.tw/" target="_blank">車輛安全資訊網</a></li>
+            <li><a href="https://www.epa.gov.tw/" target="_blank">環保署車輛資訊</a></li>
+            <li><a href="https://www.freeway.gov.tw/" target="_blank">高速公路局</a> - 即時路況</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="note-box">
+        <h4><i class="fas fa-external-link-alt"></i> 外部連結說明</h4>
+        <p>點擊外部網站連結將會離開本網站，前往第三方網站。請注意第三方網站的隱私政策與使用條款。</p>
+      </div>
+    </section>
+    
+    <!-- 返回首頁連結 -->
+    <div style="text-align: center; margin-top: 40px;">
+      <a href="index.html" class="back-button"><i class="fas fa-arrow-left"></i> 返回首頁</a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="index.html">首頁</a> |
+      <a href="cars.html">車輛列表</a> |
+      <a href="knowledge.html">知識庫</a> |
+      <a href="contact.html">聯絡我們</a> |
+      <a href="partners.html">協力廠商</a>
+    </div>
+    <p>&copy; 2025 漢新二手車專賣</p>
+    <p>本網站僅供學習使用，非實際營業網站</p>
+  </footer>
+</body>
+</html>
