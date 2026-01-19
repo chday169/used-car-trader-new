@@ -2,70 +2,539 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
-  <title>車輛列表 - 漢新二手車</title>
-  <link rel="stylesheet" href="css/style.css">
+  <title>車輛列表 - 漢新二手車專賣</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    /* 基本樣式 - 與首頁保持一致 */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      background: #f5f5f5;
+    }
+    
+    header {
+      background: #333;
+      color: white;
+      padding: 15px 20px;
+    }
+    
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .logo-title {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .logo {
+      height: 60px;
+      width: auto;
+      border-radius: 5px;
+    }
+    
+    .header-text h1 {
+      margin: 0;
+      font-size: 1.8em;
+    }
+    
+    .header-text p {
+      margin: 5px 0 0;
+      color: #ddd;
+      font-size: 0.9em;
+    }
+    
+    nav {
+      margin-top: 10px;
+      text-align: center;
+      padding: 10px 0;
+      background: #444;
+    }
+    
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+    
+    nav a:hover {
+      text-decoration: underline;
+      color: #4da6ff;
+    }
+    
+    main {
+      padding: 30px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      min-height: 60vh;
+    }
+    
+    h1, h2, h3 {
+      color: #333;
+    }
+    
+    /* 網站通知樣式 */
     .site-notice {
       background: #fff7cc;
       border: 1px solid #e6cf57;
       color: #664d03;
       padding: 12px 16px;
-      margin: 16px 0;
+      margin: 20px 0 30px;
       border-radius: 6px;
       font-weight: 600;
       text-align: center;
+    }
+    
+    /* 車輛列表樣式 */
+    .cars-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .cars-header h2 {
+      font-size: 2em;
+      margin-bottom: 10px;
+      color: #007bff;
+    }
+    
+    .cars-header p {
+      color: #666;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .car-list-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 20px;
+    }
+    
+    .car-item {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .car-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+    
+    .car-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-bottom: 2px solid #f0f0f0;
+    }
+    
+    .car-details {
+      padding: 20px;
+    }
+    
+    .car-details h3 {
+      margin-top: 0;
+      color: #333;
+      font-size: 1.4em;
+      margin-bottom: 10px;
+    }
+    
+    .car-price {
+      font-size: 1.5em;
+      color: #007bff;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+    
+    .car-specs {
+      list-style: none;
+      padding: 0;
+      margin: 15px 0;
+    }
+    
+    .car-specs li {
+      padding: 5px 0;
+      border-bottom: 1px solid #f0f0f0;
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .car-specs li:last-child {
+      border-bottom: none;
+    }
+    
+    .car-specs .spec-label {
+      font-weight: bold;
+      color: #666;
+    }
+    
+    .car-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 15px 0;
+    }
+    
+    .car-feature {
+      background: #e8f4ff;
+      color: #007bff;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 0.85em;
+      font-weight: 600;
+    }
+    
+    .car-actions {
+      margin-top: 20px;
+      text-align: center;
+    }
+    
+    .btn-view {
+      display: inline-block;
+      background: #007bff;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    
+    .btn-view:hover {
+      background: #0056b3;
+    }
+    
+    .btn-contact {
+      display: inline-block;
+      background: #28a745;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background 0.3s;
+      margin-left: 10px;
+    }
+    
+    .btn-contact:hover {
+      background: #218838;
+    }
+    
+    /* 頁尾樣式 */
+    footer {
+      background: #333;
+      color: white;
+      margin-top: 50px;
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .footer-section h3 {
+      color: white;
+      border-bottom: none;
+      padding: 0;
+      margin-bottom: 15px;
+    }
+    
+    .footer-section a {
+      color: #ddd;
+      text-decoration: none;
+    }
+    
+    .footer-section a:hover {
+      color: white;
+    }
+    
+    .copyright {
+      text-align: center;
+      padding: 20px;
+      background: #222;
+      color: #aaa;
+    }
+    
+    /* 響應式設計 */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .logo-title {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      nav {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .car-list-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .car-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .btn-contact {
+        margin-left: 0;
+        margin-top: 5px;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>車輛列表</h1>
+    <div class="header-content">
+      <div class="logo-title">
+        <img src="images/car-seller.jpg" alt="漢新二手車專賣Logo" class="logo">
+        <div class="header-text">
+          <h1>漢新二手車專賣</h1>
+          <p>專業、誠信、優質服務</p>
+        </div>
+      </div>
+    </div>
     <nav>
-      <a href="/used_cars_trade/index.html">首頁</a> |
-      <a href="/used_cars_trade/cars.html">車輛列表</a> |
-      <a href="/used_cars_trade/contact.html">聯絡我們</a> |
-      <a href="/used_cars_trade/partners.html">協力廠商</a>
+      <a href="index.html"><i class="fas fa-home"></i> 首頁</a>
+      <a href="cars.html"><i class="fas fa-car"></i> 車輛列表</a>
+      <a href="knowledge.html"><i class="fas fa-book"></i> 知識庫</a>
+      <a href="contact.html"><i class="fas fa-phone"></i> 聯絡我們</a>
+      <a href="partners.html"><i class="fas fa-handshake"></i> 協力廠商</a>
     </nav>
   </header>
 
   <main>
     <div class="site-notice">這是網頁測試，尚未開始營業。</div>
 
-    <div class="car-item">
-      <h3>Benz C300 2019</h3>
-      <p>價格：NT$1,280,000</p>
-      <p>里程：32,000 公里</p>
-      <img src="https://images.unsplash.com/photo-1617531653332-3f3c6f3c3c3c?auto=format&fit=crop&w=500&q=80" alt="Benz 車照" width="250">
-      <p><a href="car001.html">查看詳細資訊</a></p>
+    <div class="cars-header">
+      <h2><i class="fas fa-car"></i> 精選車輛列表</h2>
+      <p>所有車輛均經過150項專業檢測，確保車況良好。提供完整車輛報告，透明交易，讓您買得安心。</p>
     </div>
 
-    <div class="car-item">
-      <h3>三菱 Colt Plus 2016</h3>
-      <p>價格：NT$268,000</p>
-      <p>里程：85,000 公里</p>
-      <img src="https://images.unsplash.com/photo-1583267745174-4c4c4c4c4c4c?auto=format&fit=crop&w=500&q=80" alt="三菱 車照" width="250">
-      <p><a href="car002.html">查看詳細資訊</a></p>
+    <div class="car-list-container">
+      <div class="car-item">
+        <img src="images/benz.jpg" alt="Benz C300 2019" class="car-image">
+        <div class="car-details">
+          <h3>Benz C300 2019</h3>
+          <div class="car-price">NT$1,280,000</div>
+          <ul class="car-specs">
+            <li><span class="spec-label">里程：</span>32,000 公里</li>
+            <li><span class="spec-label">年份：</span>2019年</li>
+            <li><span class="spec-label">排氣量：</span>1991 cc</li>
+            <li><span class="spec-label">變速系統：</span>9速手自排</li>
+            <li><span class="spec-label">顏色：</span>白色</li>
+          </ul>
+          <div class="car-features">
+            <span class="car-feature">AMG套件</span>
+            <span class="car-feature">全景天窗</span>
+            <span class="car-feature">盲點偵測</span>
+            <span class="car-feature">ACC巡航</span>
+          </div>
+          <p><strong>特色：</strong>2019年出廠，原廠保固中，全車原鈑件，配備AMG套件，全景天窗，盲點偵測，ACC主動巡航</p>
+          <div class="car-actions">
+            <a href="car001.html" class="btn-view"><i class="fas fa-info-circle"></i> 查看詳細資訊</a>
+            <a href="contact.html" class="btn-contact"><i class="fas fa-phone"></i> 預約賞車</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="car-item">
+        <img src="images/mitshi.jpg" alt="Mitsubishi Outlander 2020" class="car-image">
+        <div class="car-details">
+          <h3>Mitsubishi Outlander 2020</h3>
+          <div class="car-price">NT$658,000</div>
+          <ul class="car-specs">
+            <li><span class="spec-label">里程：</span>45,000 公里</li>
+            <li><span class="spec-label">年份：</span>2020年</li>
+            <li><span class="spec-label">排氣量：</span>2360 cc</li>
+            <li><span class="spec-label">變速系統：</span>CVT無段變速</li>
+            <li><span class="spec-label">顏色：</span>銀色</li>
+          </ul>
+          <div class="car-features">
+            <span class="car-feature">七人座</span>
+            <span class="car-feature">ACC</span>
+            <span class="car-feature">FCM</span>
+            <span class="car-feature">360環景</span>
+          </div>
+          <p><strong>特色：</strong>七人座休旅，適合家庭出遊。配備ACC、FCM、360度環景，空間寬敞，安全配備齊全。</p>
+          <div class="car-actions">
+            <a href="car002.html" class="btn-view"><i class="fas fa-info-circle"></i> 查看詳細資訊</a>
+            <a href="contact.html" class="btn-contact"><i class="fas fa-phone"></i> 預約賞車</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="car-item">
+        <img src="images/nissan.jpg" alt="Nissan Kicks 2021" class="car-image">
+        <div class="car-details">
+          <h3>Nissan Kicks 2021</h3>
+          <div class="car-price">NT$598,000</div>
+          <ul class="car-specs">
+            <li><span class="spec-label">里程：</span>28,000 公里</li>
+            <li><span class="spec-label">年份：</span>2021年</li>
+            <li><span class="spec-label">排氣量：</span>1498 cc</li>
+            <li><span class="spec-label">變速系統：</span>CVT無段變速</li>
+            <li><span class="spec-label">顏色：</span>藍色</li>
+          </ul>
+          <div class="car-features">
+            <span class="car-feature">IEB</span>
+            <span class="car-feature">LDW</span>
+            <span class="car-feature">BSW</span>
+            <span class="car-feature">省油</span>
+          </div>
+          <p><strong>特色：</strong>都會型 SUV，省油好停車。配備IEB、LDW、BSW安全系統，適合都會通勤使用。</p>
+          <div class="car-actions">
+            <a href="car003.html" class="btn-view"><i class="fas fa-info-circle"></i> 查看詳細資訊</a>
+            <a href="contact.html" class="btn-contact"><i class="fas fa-phone"></i> 預約賞車</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="car-item">
+        <img src="images/toyata.jpg" alt="Toyota Altis 2020" class="car-image">
+        <div class="car-details">
+          <h3>Toyota Altis 2020</h3>
+          <div class="car-price">NT$528,000</div>
+          <ul class="car-specs">
+            <li><span class="spec-label">里程：</span>35,000 公里</li>
+            <li><span class="spec-label">年份：</span>2020年</li>
+            <li><span class="spec-label">排氣量：</span>1798 cc</li>
+            <li><span class="spec-label">變速系統：</span>CVT無段變速</li>
+            <li><span class="spec-label">顏色：</span>黑色</li>
+          </ul>
+          <div class="car-features">
+            <span class="car-feature">TSS 2.0</span>
+            <span class="car-feature">保值</span>
+            <span class="car-feature">低油耗</span>
+            <span class="car-feature">好保養</span>
+          </div>
+          <p><strong>特色：</strong>經典房車，保養容易，適合通勤。TSS 2.0安全系統，市場保值性高，維修保養方便。</p>
+          <div class="car-actions">
+            <a href="car004.html" class="btn-view"><i class="fas fa-info-circle"></i> 查看詳細資訊</a>
+            <a href="contact.html" class="btn-contact"><i class="fas fa-phone"></i> 預約賞車</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="car-item">
+        <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=500&q=80" alt="三菱 Colt Plus 2016" class="car-image">
+        <div class="car-details">
+          <h3>三菱 Colt Plus 2016</h3>
+          <div class="car-price">NT$268,000</div>
+          <ul class="car-specs">
+            <li><span class="spec-label">里程：</span>85,000 公里</li>
+            <li><span class="spec-label">年份：</span>2016年</li>
+            <li><span class="spec-label">排氣量：</span>1499 cc</li>
+            <li><span class="spec-label">變速系統：</span>CVT無段變速</li>
+            <li><span class="spec-label">顏色：</span>銀色</li>
+          </ul>
+          <div class="car-features">
+            <span class="car-feature">大空間</span>
+            <span class="car-feature">省油</span>
+            <span class="car-feature">好停車</span>
+            <span class="car-feature">實用</span>
+          </div>
+          <p><strong>特色：</strong>小型掀背車，空間變化靈活，省油經濟，適合市區通勤與小家庭使用。</p>
+          <div class="car-actions">
+            <a href="car005.html" class="btn-view"><i class="fas fa-info-circle"></i> 查看詳細資訊</a>
+            <a href="contact.html" class="btn-contact"><i class="fas fa-phone"></i> 預約賞車</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="car-item">
+        <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=500&q=80" alt="裕隆 Sentra 2015" class="car-image">
+        <div class="car-details">
+          <h3>裕隆 Sentra 2015</h3>
+          <div class="car-price">NT$198,000</div>
+          <ul class="car-specs">
+            <li><span class="spec-label">里程：</span>92,000 公里</li>
+            <li><span class="spec-label">年份：</span>2015年</li>
+            <li><span class="spec-label">排氣量：</span>1798 cc</li>
+            <li><span class="spec-label">變速系統：</span>CVT無段變速</li>
+            <li><span class="spec-label">顏色：</span>白色</li>
+          </ul>
+          <div class="car-features">
+            <span class="car-feature">經濟實惠</span>
+            <span class="car-feature">舒適</span>
+            <span class="car-feature">空間大</span>
+            <span class="car-feature">好保養</span>
+          </div>
+          <p><strong>特色：</strong>國民房車，經濟實惠，乘坐舒適，維護成本低，適合預算型買家或新手駕駛。</p>
+          <div class="car-actions">
+            <a href="car006.html" class="btn-view"><i class="fas fa-info-circle"></i> 查看詳細資訊</a>
+            <a href="contact.html" class="btn-contact"><i class="fas fa-phone"></i> 預約賞車</a>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="car-item">
-      <h3>裕隆 Sentra 2015</h3>
-      <p>價格：NT$198,000</p>
-      <p>里程：92,000 公里</p>
-      <img src="https://images.unsplash.com/photo-1571607388263-4f4f4f4f4f4f?auto=format&fit=crop&w=500&q=80" alt="裕隆 車照" width="250">
-      <p><a href="car003.html">查看詳細資訊</a></p>
-    </div>
-
-    <div class="car-item">
-      <h3>Toyota Corolla Altis 2018</h3>
-      <p>價格：NT$428,000</p>
-      <p>里程：65,000 公里</p>
-      <img src="https://images.unsplash.com/photo-1603161847483-9d9c9c9c9c9c?auto=format&fit=crop&w=500&q=80" alt="Toyota 車照" width="250">
-      <p><a href="car004.html">查看詳細資訊</a></p>
+    <div style="text-align: center; margin-top: 40px;">
+      <p style="font-size: 1.1em; color: #666;">找不到合適的車款嗎？歡迎直接<a href="contact.html" style="color: #007bff; font-weight: bold;">聯絡我們</a>，我們可以為您尋找特定車型。</p>
     </div>
   </main>
 
   <footer>
-    <p>&copy; 2025 漢新二手車專賣</p>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>漢新二手車專賣</h3>
+        <p>提供高品質二手車買賣服務，讓您買得安心、開得放心。</p>
+        <img src="images/car-seller.jpg" alt="漢新二手車專賣Logo" style="height: 50px; margin-top: 10px;">
+      </div>
+      
+      <div class="footer-section">
+        <h3>聯絡資訊</h3>
+        <p><i class="fas fa-phone-alt"></i> 電話：02-1234-5678</p>
+        <p><i class="fas fa-envelope"></i> 信箱：service@hanxin-cars.tw</p>
+        <p><i class="fas fa-map-marker-alt"></i> 地址：新北市新店區安康路123號</p>
+      </div>
+      
+      <div class="footer-section">
+        <h3>營業時間</h3>
+        <p>週一至週五：09:00 - 20:00</p>
+        <p>週六：09:00 - 18:00</p>
+        <p>週日：預約制</p>
+      </div>
+      
+      <div class="footer-section">
+        <h3>快速連結</h3>
+        <p><a href="cars.html"><i class="fas fa-car"></i> 車輛列表</a></p>
+        <p><a href="knowledge.html"><i class="fas fa-book"></i> 車主知識庫</a></p>
+        <p><a href="contact.html"><i class="fas fa-phone"></i> 聯絡我們</a></p>
+        <p><a href="partners.html"><i class="fas fa-handshake"></i> 協力廠商</a></p>
+      </div>
+    </div>
+    
+    <div class="copyright">
+      <p>&copy; 2025 漢新二手車專賣 版權所有</p>
+      <p>本網站僅供學習使用，非實際營業網站</p>
+    </div>
   </footer>
 </body>
 </html>
