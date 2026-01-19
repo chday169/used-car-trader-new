@@ -2,53 +2,373 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
-  <title>協力廠商 - 偉漢二手車專賣</title>
-  <link rel="stylesheet" href="css/style.css">
+  <title>協力廠商 - 漢新二手車專賣</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* 基本樣式 - 與首頁保持一致 */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      background: #f5f5f5;
+    }
+    
+    header {
+      background: #333;
+      color: white;
+      padding: 15px 20px;
+    }
+    
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .logo-title {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .logo {
+      height: 60px;
+      width: auto;
+      border-radius: 5px;
+    }
+    
+    .header-text h1 {
+      margin: 0;
+      font-size: 1.8em;
+    }
+    
+    .header-text p {
+      margin: 5px 0 0;
+      color: #ddd;
+      font-size: 0.9em;
+    }
+    
+    nav {
+      margin-top: 10px;
+      text-align: center;
+      padding: 10px 0;
+      background: #444;
+    }
+    
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+    
+    nav a:hover {
+      text-decoration: underline;
+      color: #4da6ff;
+    }
+    
+    main {
+      padding: 30px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      min-height: 60vh;
+    }
+    
+    /* 協力廠商樣式 */
+    .partners-intro {
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+    
+    .partners-intro p {
+      font-size: 1.1em;
+      line-height: 1.8;
+      color: #555;
+    }
+    
+    .partner-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 30px;
+      margin-top: 20px;
+    }
+    
+    .partner-card {
+      background: white;
+      border-radius: 10px;
+      padding: 25px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-top: 5px solid #007bff;
+    }
+    
+    .partner-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+    
+    .partner-card h3 {
+      color: #007bff;
+      margin-top: 0;
+      font-size: 1.5em;
+      border-bottom: 2px solid #f0f0f0;
+      padding-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .partner-card ul {
+      padding-left: 0;
+      list-style: none;
+    }
+    
+    .partner-card li {
+      padding: 10px 0;
+      border-bottom: 1px solid #f0f0f0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .partner-card li:last-child {
+      border-bottom: none;
+    }
+    
+    .partner-card i {
+      color: #007bff;
+      width: 20px;
+      text-align: center;
+    }
+    
+    .service-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 15px;
+    }
+    
+    .service-tag {
+      background: #e8f4ff;
+      color: #007bff;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.9em;
+      font-weight: 600;
+    }
+    
+    .partner-type {
+      display: inline-block;
+      background: #28a745;
+      color: white;
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-size: 0.8em;
+      margin-left: 10px;
+      font-weight: 600;
+    }
+    
+    /* 頁尾樣式 */
+    footer {
+      background: #333;
+      color: white;
+      margin-top: 50px;
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .footer-section h3 {
+      color: white;
+      border-bottom: none;
+      padding: 0;
+      margin-bottom: 15px;
+    }
+    
+    .footer-section a {
+      color: #ddd;
+      text-decoration: none;
+    }
+    
+    .footer-section a:hover {
+      color: white;
+    }
+    
+    .copyright {
+      text-align: center;
+      padding: 20px;
+      background: #222;
+      color: #aaa;
+    }
+    
+    /* 響應式設計 */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .logo-title {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      nav {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .partner-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
   <header>
-    <h1>協力廠商推薦</h1>
+    <div class="header-content">
+      <div class="logo-title">
+        <img src="images/car-seller.jpg" alt="漢新二手車專賣Logo" class="logo">
+        <div class="header-text">
+          <h1>漢新二手車專賣</h1>
+          <p>專業、誠信、優質服務</p>
+        </div>
+      </div>
+    </div>
     <nav>
-      <a href="/used_cars_trade/index.html">首頁</a> |
-      <a href="/used_cars_trade/cars.html">車輛列表</a> |
-      <a href="/used_cars_trade/contact.html">聯絡我們</a> |
-      <a href="/used_cars_trade/partners.html">協力廠商</a>
+      <a href="index.html"><i class="fas fa-home"></i> 首頁</a>
+      <a href="cars.html"><i class="fas fa-car"></i> 車輛列表</a>
+      <a href="knowledge.html"><i class="fas fa-book"></i> 知識庫</a>
+      <a href="contact.html"><i class="fas fa-phone"></i> 聯絡我們</a>
+      <a href="partners.html"><i class="fas fa-handshake"></i> 協力廠商</a>
     </nav>
   </header>
 
   <main>
-    <p>為了讓您購車後也能安心使用，我們推薦以下三家值得信賴的協力廠商，提供洗車美容、輪胎檢修與保養維修等服務：</p>
-
-    <div class="partner">
-      <h3>亮晶晶洗車美容中心</h3>
-      <ul>
-        <li>📞 電話：02-8912-3456</li>
-        <li>📍 地址：新北市新店區中央路123號</li>
-        <li>🧼 服務項目：外觀清潔、內裝美容、鍍膜處理</li>
-      </ul>
+    <div class="partners-intro">
+      <h2><i class="fas fa-handshake"></i> 協力廠商推薦</h2>
+      <p>為了讓您購車後也能安心使用，我們特別精選以下值得信賴的協力廠商。這些廠商與我們長期合作，提供專業的洗車美容、輪胎檢修與保養維修等服務，確保您的愛車始終保持最佳狀態。</p>
+      <p>透過漢新二手車專賣購車的客戶，可享有協力廠商的專屬優惠折扣。</p>
     </div>
 
-    <div class="partner">
-      <h3>輪動人生輪胎檢修站</h3>
-      <ul>
-        <li>📞 電話：02-8866-7788</li>
-        <li>📍 地址：新北市新店區民權路88號</li>
-        <li>🛞 服務項目：輪胎更換、定位校正、胎壓檢查</li>
-      </ul>
+    <div class="partner-container">
+      <div class="partner-card">
+        <h3><i class="fas fa-car-wash"></i> 亮晶晶洗車美容中心 <span class="partner-type">白金合作</span></h3>
+        <ul>
+          <li><i class="fas fa-phone"></i> <strong>電話：</strong>02-8912-3456</li>
+          <li><i class="fas fa-map-marker-alt"></i> <strong>地址：</strong>新北市新店區中央路123號</li>
+          <li><i class="fas fa-clock"></i> <strong>營業時間：</strong>09:00-20:00（週一至週六）</li>
+          <li><i class="fas fa-star"></i> <strong>推薦理由：</strong>使用環保清潔劑，專業鍍膜技術，細心處理內裝</li>
+        </ul>
+        <div class="service-tags">
+          <span class="service-tag">外觀清潔</span>
+          <span class="service-tag">內裝美容</span>
+          <span class="service-tag">鍍膜處理</span>
+          <span class="service-tag">玻璃鍍膜</span>
+          <span class="service-tag">皮椅保養</span>
+        </div>
+      </div>
+
+      <div class="partner-card">
+        <h3><i class="fas fa-tire"></i> 輪動人生輪胎檢修站 <span class="partner-type">黃金合作</span></h3>
+        <ul>
+          <li><i class="fas fa-phone"></i> <strong>電話：</strong>02-8866-7788</li>
+          <li><i class="fas fa-map-marker-alt"></i> <strong>地址：</strong>新北市新店區民權路88號</li>
+          <li><i class="fas fa-clock"></i> <strong>營業時間：</strong>08:30-19:30（週一至週五），09:00-18:00（週六）</li>
+          <li><i class="fas fa-star"></i> <strong>推薦理由：</strong>專業四輪定位設備，各大品牌輪胎齊全，技師經驗豐富</li>
+        </ul>
+        <div class="service-tags">
+          <span class="service-tag">輪胎更換</span>
+          <span class="service-tag">定位校正</span>
+          <span class="service-tag">胎壓檢查</span>
+          <span class="service-tag">剎車系統</span>
+          <span class="service-tag">底盤檢修</span>
+        </div>
+      </div>
+
+      <div class="partner-card">
+        <h3><i class="fas fa-tools"></i> 車之道保養維修中心 <span class="partner-type">鑽石合作</span></h3>
+        <ul>
+          <li><i class="fas fa-phone"></i> <strong>電話：</strong>02-8999-1122</li>
+          <li><i class="fas fa-map-marker-alt"></i> <strong>地址：</strong>新北市新店區北新路456號</li>
+          <li><i class="fas fa-clock"></i> <strong>營業時間：</strong>08:00-20:00（週一至週六）</li>
+          <li><i class="fas fa-star"></i> <strong>推薦理由：</strong>原廠認證技師，使用正廠零件，提供保固服務</li>
+        </ul>
+        <div class="service-tags">
+          <span class="service-tag">定期保養</span>
+          <span class="service-tag">機油更換</span>
+          <span class="service-tag">引擎檢修</span>
+          <span class="service-tag">冷氣維修</span>
+          <span class="service-tag">電機系統</span>
+        </div>
+      </div>
     </div>
 
-    <div class="partner">
-      <h3>車之道保養維修中心</h3>
-      <ul>
-        <li>📞 電話：02-8999-1122</li>
-        <li>📍 地址：新北市新店區北新路456號</li>
-        <li>🔧 服務項目：定期保養、機油更換、引擎檢修</li>
+    <div class="partners-intro" style="margin-top: 40px;">
+      <h3><i class="fas fa-percentage"></i> 專屬優惠方案</h3>
+      <p>憑漢新二手車專賣的購車證明或客戶識別卡，即可享有以下優惠：</p>
+      <ul style="padding-left: 20px;">
+        <li><strong>亮晶晶洗車美容中心：</strong>首次消費享8折優惠，定期保養套餐9折</li>
+        <li><strong>輪動人生輪胎檢修站：</strong>輪胎購買安裝享85折，定位服務9折</li>
+        <li><strong>車之道保養維修中心：</strong>保養工資8折，零件費用95折</li>
       </ul>
+      <p style="margin-top: 15px; font-style: italic; color: #666;">優惠活動有效期至2025年12月31日，詳細資訊請洽各協力廠商。</p>
     </div>
   </main>
 
   <footer>
-    <p>&copy; 2025 偉漢二手車專賣</p>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>漢新二手車專賣</h3>
+        <p>提供高品質二手車買賣服務，讓您買得安心、開得放心。</p>
+        <p>協力廠商合作洽詢：02-1234-5678 轉 合作部</p>
+      </div>
+      
+      <div class="footer-section">
+        <h3>聯絡資訊</h3>
+        <p><i class="fas fa-phone-alt"></i> 電話：02-1234-5678</p>
+        <p><i class="fas fa-envelope"></i> 信箱：service@hanxin-cars.tw</p>
+        <p><i class="fas fa-map-marker-alt"></i> 地址：新北市新店區安康路123號</p>
+      </div>
+      
+      <div class="footer-section">
+        <h3>營業時間</h3>
+        <p>週一至週五：09:00 - 20:00</p>
+        <p>週六：09:00 - 18:00</p>
+        <p>週日：預約制</p>
+      </div>
+      
+      <div class="footer-section">
+        <h3>快速連結</h3>
+        <p><a href="cars.html"><i class="fas fa-car"></i> 車輛列表</a></p>
+        <p><a href="knowledge.html"><i class="fas fa-book"></i> 車主知識庫</a></p>
+        <p><a href="contact.html"><i class="fas fa-phone"></i> 聯絡我們</a></p>
+        <p><a href="partners.html"><i class="fas fa-handshake"></i> 協力廠商</a></p>
+      </div>
+    </div>
+    
+    <div class="copyright">
+      <p>&copy; 2025 漢新二手車專賣 版權所有</p>
+      <p>本網站僅供學習使用，非實際營業網站 | 協力廠商資訊為示例內容</p>
+    </div>
   </footer>
 </body>
 </html>
