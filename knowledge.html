@@ -1,986 +1,580 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>車主知識庫 - 漢新二手車專賣</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    /* 重置樣式 */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    
-    /* 知識庫專用樣式 */
-    body {
-      font-family: 'Segoe UI', 'Microsoft JhengHei', Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      line-height: 1.6;
-      color: #333;
-      background: #f5f7fa;
-    }
-    
-    header {
-      background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-      color: white;
-      padding: 25px 20px;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-    
-    header h1 {
-      margin: 0 0 10px 0;
-      font-size: 2.4em;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-      letter-spacing: 0.5px;
-    }
-    
-    .header-subtitle {
-      font-size: 1.1em;
-      color: #ecf0f1;
-      margin-bottom: 20px;
-      opacity: 0.9;
-    }
-    
-    nav {
-      margin-top: 20px;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
-      padding: 10px 20px;
-      border-radius: 6px;
-      transition: all 0.3s ease;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.15);
-      font-size: 0.95em;
-    }
-    
-    nav a:hover {
-      background: #3498db;
-      transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-      text-decoration: none;
-    }
-    
-    nav a.active {
-      background: #3498db;
-      box-shadow: 0 3px 10px rgba(52, 152, 219, 0.3);
-    }
-    
-    nav a i {
-      margin-right: 8px;
-    }
-    
-    main {
-      padding: 25px 20px;
-      max-width: 1200px;
-      margin: 0 auto;
-      min-height: 70vh;
-    }
-    
-    section {
-      margin: 45px 0;
-    }
-    
-    h2 {
-      color: #2c3e50;
-      border-bottom: 3px solid #3498db;
-      padding-bottom: 12px;
-      margin-bottom: 25px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 1.8em;
-    }
-    
-    h2 i {
-      color: #3498db;
-      font-size: 1.2em;
-    }
-    
-    h3 {
-      color: #2c3e50;
-      margin: 25px 0 15px 0;
-      font-size: 1.4em;
-      padding-left: 10px;
-      border-left: 4px solid #3498db;
-    }
-    
-    h4 {
-      color: #34495e;
-      margin: 20px 0 10px 0;
-      font-size: 1.1em;
-    }
-    
-    /* 知識庫類別樣式 */
-    .knowledge-category {
-      margin: 45px 0;
-      padding: 30px;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-      border: 1px solid #eaeaea;
-    }
-    
-    .article-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 30px;
-      margin-top: 30px;
-    }
-    
-    .knowledge-card {
-      background: white;
-      padding: 28px;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-      transition: all 0.3s ease;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      border: 1px solid #f0f0f0;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .knowledge-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, #3498db, #2ecc71);
-    }
-    
-    .knowledge-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 25px rgba(0,0,0,0.12);
-    }
-    
-    .knowledge-card h3 {
-      color: #2c3e50;
-      border-bottom: 2px solid #f0f0f0;
-      padding-bottom: 12px;
-      margin-top: 0;
-      margin-bottom: 20px;
-      border-left: none;
-      padding-left: 0;
-    }
-    
-    .knowledge-card ul, .knowledge-card ol {
-      padding-left: 20px;
-      margin-bottom: 20px;
-    }
-    
-    .knowledge-card li {
-      margin-bottom: 10px;
-      line-height: 1.7;
-    }
-    
-    .knowledge-card p {
-      margin-bottom: 15px;
-      line-height: 1.7;
-    }
-    
-    .tech-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 20px 0;
-      font-size: 0.95em;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
-    
-    .tech-table th, .tech-table td {
-      border: 1px solid #e0e0e0;
-      padding: 14px;
-      text-align: left;
-    }
-    
-    .tech-table th {
-      background: #f8f9fa;
-      font-weight: 700;
-      color: #2c3e50;
-      border-bottom: 2px solid #ddd;
-    }
-    
-    .tech-table tr:nth-child(even) {
-      background: #fafafa;
-    }
-    
-    .tech-table tr:hover {
-      background: #f0f8ff;
-    }
-    
-    .website-links {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 25px;
-      margin-top: 30px;
-    }
-    
-    .website-card {
-      border: 1px solid #e0e0e0;
-      padding: 25px;
-      border-radius: 10px;
-      background: white;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-      transition: all 0.3s ease;
-      height: 100%;
-      position: relative;
-    }
-    
-    .website-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-      border-color: #3498db;
-    }
-    
-    .website-card h4 {
-      margin-top: 0;
-      color: #2c3e50;
-      border-bottom: 2px solid #f0f0f0;
-      padding-bottom: 15px;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 1.2em;
-    }
-    
-    .website-card h4 i {
-      color: #3498db;
-      font-size: 1.1em;
-    }
-    
-    .website-card ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    
-    .website-card li {
-      margin-bottom: 18px;
-      padding-bottom: 18px;
-      border-bottom: 1px dashed #eee;
-    }
-    
-    .website-card li:last-child {
-      margin-bottom: 0;
-      padding-bottom: 0;
-      border-bottom: none;
-    }
-    
-    /* 安全提示樣式 */
-    .safety-tips {
-      display: grid;
-      gap: 20px;
-      margin: 20px 0;
-    }
-    
-    .tip {
-      padding: 22px;
-      background: linear-gradient(to right, #e8f4fd, #d9edf7);
-      border-radius: 10px;
-      border-left: 6px solid #17a2b8;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .tip::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
-      transform: translateX(-100%);
-    }
-    
-    .tip:hover::before {
-      transform: translateX(100%);
-      transition: transform 0.6s ease;
-    }
-    
-    .tip:hover {
-      background: linear-gradient(to right, #d9edf7, #c4e3f3);
-      transform: translateX(8px);
-    }
-    
-    .tip h4 {
-      margin-top: 0;
-      color: #17a2b8;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 1.1em;
-    }
-    
-    /* 注意事項框 */
-    .note-box {
-      background: linear-gradient(to right, #fff9e6, #fff3cd);
-      border: 1px solid #ffeaa7;
-      border-radius: 10px;
-      padding: 25px;
-      margin: 30px 0;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-      border-left: 5px solid #f1c40f;
-    }
-    
-    .note-box h4 {
-      color: #856404;
-      margin-top: 0;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 1.2em;
-    }
-    
-    .note-box ul {
-      margin-top: 15px;
-      padding-left: 20px;
-    }
-    
-    .note-box li {
-      margin-bottom: 8px;
-      line-height: 1.6;
-    }
-    
-    /* 外部連結樣式 */
-    .external-link {
-      color: #2980b9;
-      text-decoration: none;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 4px 0;
-    }
-    
-    .external-link:hover {
-      color: #1a5276;
-      text-decoration: none;
-      transform: translateX(5px);
-    }
-    
-    .external-link i {
-      font-size: 0.85em;
-      transition: transform 0.3s ease;
-    }
-    
-    .external-link:hover i {
-      transform: translateX(5px);
-    }
-    
-    /* 網站描述文字 */
-    .website-description {
-      font-size: 0.9em;
-      color: #666;
-      margin-top: 8px;
-      line-height: 1.5;
-      padding-left: 23px;
-    }
-    
-    /* 返回按鈕 */
-    .back-button {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: linear-gradient(135deg, #7f8c8d 0%, #95a5a6 100%);
-      color: white;
-      padding: 14px 28px;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      margin-top: 25px;
-      border: none;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      font-size: 1em;
-    }
-    
-    .back-button:hover {
-      background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
-      transform: translateY(-3px);
-      box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-      color: white;
-      text-decoration: none;
-    }
-    
-    /* 區塊標題裝飾 */
-    .section-decorator {
-      display: flex;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-    
-    .section-decorator::before {
-      content: '';
-      width: 30px;
-      height: 4px;
-      background: #3498db;
-      margin-right: 15px;
-      border-radius: 2px;
-    }
-    
-    /* 響應式設計 */
-    @media (max-width: 992px) {
-      .website-links {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      }
-      
-      .article-grid {
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      }
-    }
-    
-    @media (max-width: 768px) {
-      header {
-        padding: 20px 15px;
-      }
-      
-      header h1 {
-        font-size: 1.9em;
-      }
-      
-      .header-subtitle {
-        font-size: 1em;
-      }
-      
-      nav {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-      }
-      
-      nav a {
-        width: 100%;
-        max-width: 300px;
-        text-align: center;
-        justify-content: center;
-      }
-      
-      .article-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-      
-      .website-links {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-      
-      main {
-        padding: 20px 15px;
-      }
-      
-      .knowledge-category {
-        padding: 20px;
-        margin: 35px 0;
-      }
-      
-      .knowledge-card {
-        padding: 22px;
-      }
-      
-      h2 {
-        font-size: 1.6em;
-      }
-      
-      h3 {
-        font-size: 1.3em;
-      }
-    }
-    
-    @media (max-width: 480px) {
-      header h1 {
-        font-size: 1.6em;
-      }
-      
-      .header-subtitle {
-        font-size: 0.95em;
-      }
-      
-      .knowledge-card, .website-card {
-        padding: 18px;
-      }
-      
-      .note-box, .tip {
-        padding: 18px;
-      }
-      
-      .back-button {
-        width: 100%;
-        justify-content: center;
-      }
-    }
-    
-    /* 頁尾樣式 */
-    footer {
-      background: linear-gradient(135deg, #2c3e50 0%, #1a252f 100%);
-      color: white;
-      margin-top: 70px;
-      text-align: center;
-      padding: 35px 20px 25px;
-    }
-    
-    footer p {
-      margin: 12px 0;
-      line-height: 1.6;
-    }
-    
-    .footer-links {
-      margin-top: 25px;
-      margin-bottom: 25px;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-    
-    .footer-links a {
-      color: #ecf0f1;
-      text-decoration: none;
-      padding: 10px 18px;
-      border-radius: 6px;
-      transition: all 0.3s ease;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    
-    .footer-links a:hover {
-      color: white;
-      background: rgba(255,255,255,0.1);
-      text-decoration: none;
-      transform: translateY(-2px);
-    }
-    
-    .copyright {
-      margin-top: 25px;
-      padding-top: 25px;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      color: #bdc3c7;
-      font-size: 0.9em;
-    }
-    
-    /* 連結區域可訪問性 */
-    .website-card a:focus,
-    .external-link:focus,
-    nav a:focus,
-    .back-button:focus {
-      outline: 2px solid #3498db;
-      outline-offset: 2px;
-    }
-    
-    /* 打印樣式 */
-    @media print {
-      nav, .back-button, .footer-links {
-        display: none;
-      }
-      
-      .knowledge-card, .website-card {
-        box-shadow: none;
-        border: 1px solid #ddd;
-        break-inside: avoid;
-      }
-      
-      .external-link::after {
-        content: " (" attr(href) ")";
-        font-size: 0.9em;
-        color: #666;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>車主知識庫 - 漢新二手車專賣</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ====== 基础重置与变量 ====== */
+        :root {
+            --primary-blue: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary-teal: #0d9488;
+            --neutral-dark: #1f2937;
+            --neutral-light: #f9fafb;
+            --neutral-gray: #6b7280;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+            --radius: 0.5rem;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft JhengHei', sans-serif;
+            line-height: 1.6;
+            color: var(--neutral-dark);
+            background-color: var(--neutral-light);
+        }
+        a { text-decoration: none; color: inherit; }
+        ul, ol { padding-left: 1.5rem; }
+        li { margin-bottom: 0.5rem; }
+
+        /* ====== 页头与导航 ====== */
+        .site-header {
+            background: linear-gradient(135deg, var(--neutral-dark) 0%, #111827 100%);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+        }
+        .site-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .site-header .subtitle {
+            font-size: 1.1rem;
+            color: #d1d5db;
+            margin-bottom: 1.5rem;
+        }
+        .main-nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+        .main-nav a {
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        .main-nav a:hover,
+        .main-nav a.current {
+            background: var(--primary-blue);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* ====== 主内容区 ====== */
+        .knowledge-base {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+        .category-section {
+            background: white;
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow-md);
+            border-left: 5px solid var(--primary-blue);
+        }
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--neutral-dark);
+            border-bottom: 3px solid #e5e7eb;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .section-title i { color: var(--primary-blue); }
+
+        /* ====== 知识卡片网格 ====== */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+        .info-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 1.75rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-blue);
+        }
+        .info-card h3 {
+            color: var(--neutral-dark);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #f3f4f6;
+        }
+
+        /* ====== 技术表格样式 ====== */
+        .tech-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+        .tech-table th {
+            background-color: #f8fafc;
+            font-weight: 700;
+            text-align: left;
+            padding: 1rem;
+            border: 1px solid #e5e7eb;
+        }
+        .tech-table td {
+            padding: 1rem;
+            border: 1px solid #e5e7eb;
+        }
+        .tech-table tr:nth-child(even) { background-color: #f9fafb; }
+        .tech-table tr:hover { background-color: #eff6ff; }
+
+        /* ====== 安全提示样式 ====== */
+        .tip {
+            background: linear-gradient(135deg, #ecfeff 0%, #cffafe 100%);
+            border-left: 5px solid var(--secondary-teal);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .tip h4 {
+            color: var(--secondary-teal);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        /* ====== 重要通知样式 ====== */
+        .important-note {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 1px solid #fbbf24;
+            border-radius: var(--radius);
+            padding: 1.75rem;
+            margin: 2rem 0;
+        }
+        .important-note h4 {
+            color: #92400e;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        /* ====== 网站资源卡片 ====== */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .resource-card {
+            border: 1px solid #e5e7eb;
+            border-radius: var(--radius);
+            padding: 1.75rem;
+            background: white;
+            transition: all 0.3s ease;
+        }
+        .resource-card:hover {
+            border-color: var(--primary-blue);
+            box-shadow: var(--shadow-md);
+        }
+        .resource-card h4 {
+            color: var(--neutral-dark);
+            font-size: 1.2rem;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #f3f4f6;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .resource-card ul { list-style: none; padding-left: 0; }
+        .resource-card li {
+            margin-bottom: 1.25rem;
+            padding-bottom: 1.25rem;
+            border-bottom: 1px dashed #e5e7eb;
+        }
+        .resource-card li:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        .ext-link {
+            color: var(--primary-blue);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            transition: color 0.2s;
+        }
+        .ext-link:hover { color: var(--primary-dark); }
+        .link-desc {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--neutral-gray);
+            margin-top: 0.375rem;
+            line-height: 1.5;
+        }
+
+        /* ====== 按钮样式 ====== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: linear-gradient(135deg, var(--neutral-gray) 0%, #4b5563 100%);
+            color: white;
+            padding: 0.875rem 1.75rem;
+            border-radius: var(--radius);
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        .btn-back { margin: 3rem auto; display: block; width: fit-content; }
+
+        /* ====== 页脚样式 ====== */
+        .site-footer {
+            background: linear-gradient(135deg, var(--neutral-dark) 0%, #111827 100%);
+            color: white;
+            text-align: center;
+            padding: 3rem 1rem 2rem;
+            margin-top: 4rem;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .footer-links a {
+            color: #d1d5db;
+            padding: 0.75rem 1.25rem;
+            border-radius: var(--radius);
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        .footer-links a:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .copyright {
+            color: #9ca3af;
+            font-size: 0.9rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* ====== 响应式设计 ====== */
+        @media (max-width: 768px) {
+            .site-header h1 { font-size: 2rem; }
+            .main-nav { flex-direction: column; align-items: center; }
+            .main-nav a { width: 100%; max-width: 300px; text-align: center; }
+            .card-grid,
+            .resources-grid { grid-template-columns: 1fr; }
+            .category-section { padding: 1.75rem; }
+            .knowledge-base { padding: 0 1rem; }
+        }
+        @media (max-width: 480px) {
+            .site-header { padding: 1.5rem 1rem; }
+            .site-header h1 { font-size: 1.75rem; }
+            .section-title { font-size: 1.5rem; }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>車主實用知識庫</h1>
-    <p class="header-subtitle">漢新二手車專賣 - 專業汽車知識與資源分享</p>
-    <nav>
-      <a href="index.html"><i class="fas fa-home"></i> 首頁</a>
-      <a href="cars.html"><i class="fas fa-car"></i> 車輛列表</a>
-      <a href="knowledge.html" class="active"><i class="fas fa-book"></i> 知識庫</a>
-      <a href="contact.html"><i class="fas fa-phone"></i> 聯絡我們</a>
-      <a href="partners.html"><i class="fas fa-handshake"></i> 協力廠商</a>
-    </nav>
-  </header>
+    <!-- 页头 -->
+    <header class="site-header">
+        <h1>車主實用知識庫</h1>
+        <p class="subtitle">漢新二手車專賣 - 專業汽車知識與資源分享</p>
+        <nav class="main-nav">
+            <a href="index.html"><i class="fas fa-home"></i> 首頁</a>
+            <a href="cars.html"><i class="fas fa-car"></i> 車輛列表</a>
+            <a href="knowledge.html" class="current"><i class="fas fa-book"></i> 知識庫</a>
+            <a href="contact.html"><i class="fas fa-phone"></i> 聯絡我們</a>
+            <a href="partners.html"><i class="fas fa-handshake"></i> 協力廠商</a>
+        </nav>
+    </header>
 
-  <main>
-    <!-- 保養常識區塊 -->
-    <section class="knowledge-category" id="maintenance">
-      <h2><i class="fas fa-tools"></i> 車輛保養常識</h2>
-      <div class="article-grid">
-        <article class="knowledge-card">
-          <h3>定期保養五大要點</h3>
-          <ul>
-            <li><strong>機油更換：</strong>每5,000-10,000公里或6個月更換一次</li>
-            <li><strong>輪胎檢查：</strong>每月檢查胎壓，注意胎紋深度（不低於1.6mm）</li>
-            <li><strong>煞車系統：</strong>注意煞車片厚度和煞車油狀態</li>
-            <li><strong>電瓶保養：</strong>保持端子清潔，避免完全放電</li>
-            <li><strong>濾清器更換：</strong>空氣濾清器、空調濾清器定期更換</li>
-          </ul>
-          <div class="note-box">
-            <h4><i class="fas fa-lightbulb"></i> 重要提醒</h4>
-            <p>定期保養不僅能延長車輛壽命，還能確保行車安全。建議按照原廠保養手冊進行定期檢查。</p>
-          </div>
-        </article>
+    <!-- 主内容区 -->
+    <main class="knowledge-base">
+        <!-- 保养常识区块 -->
+        <section class="category-section" id="maintenance">
+            <h2 class="section-title"><i class="fas fa-tools"></i> 車輛保養常識</h2>
+            <div class="card-grid">
+                <article class="info-card">
+                    <h3>定期保養五大要點</h3>
+                    <ul>
+                        <li><strong>機油更換：</strong>每5,000-10,000公里或6個月更換一次</li>
+                        <li><strong>輪胎檢查：</strong>每月檢查胎壓，注意胎紋深度（不低於1.6mm）</li>
+                        <li><strong>煞車系統：</strong>注意煞車片厚度和煞車油狀態</li>
+                        <li><strong>電瓶保養：</strong>保持端子清潔，避免完全放電</li>
+                        <li><strong>濾清器更換：</strong>空氣濾清器、空調濾清器定期更換</li>
+                    </ul>
+                    <div class="important-note">
+                        <h4><i class="fas fa-lightbulb"></i> 重要提醒</h4>
+                        <p>定期保養不僅能延長車輛壽命，還能確保行車安全。建議按照原廠保養手冊進行定期檢查。</p>
+                    </div>
+                </article>
 
-        <article class="knowledge-card">
-          <h3>二手車購入後必做檢查</h3>
-          <p>購買二手車後，建議進行以下檢查以確保車況：</p>
-          <ol>
-            <li>全車油液更換（機油、變速箱油、煞車油、冷卻液）</li>
-            <li>檢查所有皮帶和軟管</li>
-            <li>底盤與懸吊系統檢查</li>
-            <li>電氣系統測試（燈光、空調、音響等）</li>
-            <li>四輪定位與動平衡</li>
-          </ol>
-        </article>
+                <article class="info-card">
+                    <h3>二手車購入後必做檢查</h3>
+                    <p>購買二手車後，建議進行以下檢查以確保車況：</p>
+                    <ol>
+                        <li>全車油液更換（機油、變速箱油、煞車油、冷卻液）</li>
+                        <li>檢查所有皮帶和軟管</li>
+                        <li>底盤與懸吊系統檢查</li>
+                        <li>電氣系統測試（燈光、空調、音響等）</li>
+                        <li>四輪定位與動平衡</li>
+                    </ol>
+                </article>
 
-        <article class="knowledge-card">
-          <h3>季節性保養重點</h3>
-          <h4>夏季保養</h4>
-          <ul>
-            <li>冷卻系統檢查與水箱清潔</li>
-            <li>冷氣系統效能檢測</li>
-            <li>輪胎胎壓調整（避免過高）</li>
-            <li>雨刷檢查與更換</li>
-          </ul>
-          
-          <h4>冬季保養</h4>
-          <ul>
-            <li>電瓶效能測試</li>
-            <li>雨刷水添加防凍劑</li>
-            <li>暖氣系統檢查</li>
-            <li>輪胎檢查（考慮使用雪地胎）</li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
-    <!-- 駕駛安全規則 -->
-    <section class="knowledge-category" id="safety">
-      <h2><i class="fas fa-shield-alt"></i> 汽車駕駛安全規則</h2>
-      <div class="article-grid">
-        <article class="knowledge-card">
-          <h3>高速公路駕駛安全守則</h3>
-          <div class="safety-tips">
-            <div class="tip">
-              <h4><i class="fas fa-car"></i> 行車前檢查</h4>
-              <p>檢查胎壓、油量、燈光、煞車，確保車輛狀態良好。長途行駛前建議進行專業檢查。</p>
+                <article class="info-card">
+                    <h3>季節性保養重點</h3>
+                    <h4>夏季保養</h4>
+                    <ul>
+                        <li>冷卻系統檢查與水箱清潔</li>
+                        <li>冷氣系統效能檢測</li>
+                        <li>輪胎胎壓調整（避免過高）</li>
+                        <li>雨刷檢查與更換</li>
+                    </ul>
+                    <h4>冬季保養</h4>
+                    <ul>
+                        <li>電瓶效能測試</li>
+                        <li>雨刷水添加防凍劑</li>
+                        <li>暖氣系統檢查</li>
+                        <li>輪胎檢查（考慮使用雪地胎）</li>
+                    </ul>
+                </article>
             </div>
-            <div class="tip">
-              <h4><i class="fas fa-route"></i> 車道使用規則</h4>
-              <p>內側車道為超車道，超車後應返回原車道；大車應使用外側車道。保持右側行駛，左側超車原則。</p>
+        </section>
+
+        <!-- 驾驶安全规则 -->
+        <section class="category-section" id="safety">
+            <h2 class="section-title"><i class="fas fa-shield-alt"></i> 汽車駕駛安全規則</h2>
+            <div class="card-grid">
+                <article class="info-card">
+                    <h3>高速公路駕駛安全守則</h3>
+                    <div class="tip">
+                        <h4><i class="fas fa-car"></i> 行車前檢查</h4>
+                        <p>檢查胎壓、油量、燈光、煞車，確保車輛狀態良好。長途行駛前建議進行專業檢查。</p>
+                    </div>
+                    <div class="tip">
+                        <h4><i class="fas fa-route"></i> 車道使用規則</h4>
+                        <p>內側車道為超車道，超車後應返回原車道；大車應使用外側車道。保持右側行駛，左側超車原則。</p>
+                    </div>
+                    <div class="tip">
+                        <h4><i class="fas fa-road"></i> 安全距離保持</h4>
+                        <p>時速100公里時，至少保持50公尺車距；雨天加倍。使用「三秒法則」確保安全距離。</p>
+                    </div>
+                </article>
+
+                <article class="info-card">
+                    <h3>防禦性駕駛要點</h3>
+                    <ul>
+                        <li><strong>保持視線：</strong>眼觀四方，注意前方3-5輛車的動態，觀察後視鏡每5-8秒</li>
+                        <li><strong>預測風險：</strong>預判其他駕駛可能的不當行為，特別注意路口與變換車道</li>
+                        <li><strong>保持空間：</strong>前後左右保持安全緩衝空間，避免並排行駛</li>
+                        <li><strong>專注駕駛：</strong>避免使用手機、飲食等分心行為，保持雙手在方向盤上</li>
+                        <li><strong>禮讓原則：</strong>禮讓行人、優先讓行救護車輛，不爭道搶行</li>
+                    </ul>
+                </article>
             </div>
-            <div class="tip">
-              <h4><i class="fas fa-road"></i> 安全距離保持</h4>
-              <p>時速100公里時，至少保持50公尺車距；雨天加倍。使用「三秒法則」確保安全距離。</p>
+        </section>
+
+        <!-- 汽车新科技 -->
+        <section class="category-section" id="technology">
+            <h2 class="section-title"><i class="fas fa-microchip"></i> 國內外汽車新科技介紹</h2>
+            <div class="card-grid">
+                <article class="info-card">
+                    <h3>ADAS 先進駕駛輔助系統</h3>
+                    <table class="tech-table">
+                        <tr>
+                            <th>系統名稱</th>
+                            <th>功能說明</th>
+                            <th>常見車型</th>
+                        </tr>
+                        <tr>
+                            <td>ACC 主動式巡航</td>
+                            <td>自動保持與前車距離，調整車速</td>
+                            <td>Toyota RAV4, Honda CR-V</td>
+                        </tr>
+                        <tr>
+                            <td>AEB 自動緊急煞車</td>
+                            <td>偵測前方障礙，自動煞車避免碰撞</td>
+                            <td>Mazda CX-5, Nissan X-Trail</td>
+                        </tr>
+                        <tr>
+                            <td>LDW 車道偏移警示</td>
+                            <td>偵測車道線，提醒駕駛維持車道</td>
+                            <td>Ford Focus, Volkswagen Golf</td>
+                        </tr>
+                    </table>
+                </article>
             </div>
-          </div>
-        </article>
+        </section>
 
-        <article class="knowledge-card">
-          <h3>防禦性駕駛要點</h3>
-          <ul>
-            <li><strong>保持視線：</strong>眼觀四方，注意前方3-5輛車的動態，觀察後視鏡每5-8秒</li>
-            <li><strong>預測風險：</strong>預判其他駕駛可能的不當行為，特別注意路口與變換車道</li>
-            <li><strong>保持空間：</strong>前後左右保持安全緩衝空間，避免並排行駛</li>
-            <li><strong>專注駕駛：</strong>避免使用手機、飲食等分心行為，保持雙手在方向盤上</li>
-            <li><strong>禮讓原則：</strong>禮讓行人、優先讓行救護車輛，不爭道搶行</li>
-          </ul>
-        </article>
-      </div>
-    </section>
+        <!-- 国内外汽车网站链接 -->
+        <section class="category-section" id="resources">
+            <h2 class="section-title"><i class="fas fa-link"></i> 汽車資訊網站推薦</h2>
 
-    <!-- 汽車新科技 -->
-    <section class="knowledge-category" id="technology">
-      <h2><i class="fas fa-microchip"></i> 國內外汽車新科技介紹</h2>
-      <div class="article-grid">
-        <article class="knowledge-card">
-          <h3>ADAS 先進駕駛輔助系統</h3>
-          <table class="tech-table">
-            <tr>
-              <th>系統名稱</th>
-              <th>功能說明</th>
-              <th>常見車型</th>
-            </tr>
-            <tr>
-              <td>ACC 主動式巡航</td>
-              <td>自動保持與前車距離，調整車速</td>
-              <td>Toyota RAV4, Honda CR-V</td>
-            </tr>
-            <tr>
-              <td>AEB 自動緊急煞車</td>
-              <td>偵測前方障礙，自動煞車避免碰撞</td>
-              <td>Mazda CX-5, Nissan X-Trail</td>
-            </tr>
-            <tr>
-              <td>LDW 車道偏移警示</td>
-              <td>偵測車道線，提醒駕駛維持車道</td>
-              <td>Ford Focus, Volkswagen Golf</td>
-            </tr>
-          </table>
-        </article>
-      </div>
-    </section>
+            <div class="important-note">
+                <h4><i class="fas fa-info-circle"></i> 外部連結說明</h4>
+                <p>點擊外部網站連結將會離開本網站。我們推薦以下經過驗證、資訊可靠的權威網站，幫助您獲取更全面的汽車資訊。</p>
+            </div>
 
-    <!-- 國內外汽車網站連結 -->
-    <section class="knowledge-category" id="resources">
-      <h2><i class="fas fa-link"></i> 汽車資訊網站推薦</h2>
-      
-      <div class="note-box">
-        <h4><i class="fas fa-info-circle"></i> 外部連結說明</h4>
-        <p>以下推薦的網站將幫助您了解更多汽車相關資訊。點擊外部網站連結將會離開本網站，前往第三方網站。請注意第三方網站的隱私政策與使用條款。</p>
-        <p><strong>注意：</strong>部分國際網站可能需要VPN或特定地區才能訪問。若無法訪問，建議使用台灣本地網站替代。</p>
-      </div>
-      
-      <div class="website-links">
-        <div class="website-card">
-          <h4><i class="fas fa-flag"></i> 台灣網站</h4>
-          <ul>
-            <li>
-              <a href="https://www.mobile01.com/forum.php?mod=forumdisplay&fid=397" target="_blank" rel="noopener noreferrer" class="external-link">
-                Mobile01 汽車版 <i class="fas fa-external-link-alt"></i>
-              </a>
-              <div class="website-description">台灣最大的車主討論區，分享用車經驗與評價</div>
-            </li>
-            <li>
-              <a href="https://autos.yahoo.com.tw/" target="_blank" rel="noopener noreferrer" class="external-link">
-                Yahoo奇摩汽車 <i class="fas fa-external-link-alt"></i>
-              </a>
-              <div class="website-description">新聞、試駕報導與汽車資訊</div>
-            </li>
-            <li>
-              <a href="https://www.7car.tw/" target="_blank" rel="noopener noreferrer" class="external-link">
-                七汽車網 <i class="fas fa-external-link-alt"></i>
-              </a>
-              <div class="website-description">台灣汽車新聞與資訊平台</div>
-            </li>
-            <li>
-              <a href="https://www.carnews.com/" target="_blank" rel="noopener noreferrer" class="external-link">
-                車訊網 <i class="fas fa-external-link-alt"></i>
-              </a>
-              <div class="website-description">專業汽車媒體與評測報導</div>
-            </li>
-            <li>
-              <a href="https://motor.u-car.com.tw/" target="_blank" rel="noopener noreferrer" class="external-link">
-                U-CAR <i class="fas fa-external-link-alt"></i>
-              </a>
-              <div class="website-description">新車與二手車資訊、專業評測</div>
-            </li>
-            <li>
-              <a href="https://www.8891.com.tw/" target="_blank" rel="noopener noreferrer" class="external-link">
-                8891汽車交易網 <i class="fas fa-external-link-alt"></i>
-              </a>
-              <div class="website-description">台灣最大汽車交易平台，豐富車源資訊</div>
-            </li>
-          </ul>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <h4><i class="fas fa-flag"></i> 台灣網站</h4>
+                    <ul>
+                        <li>
+                            <a href="https://www.mobile01.com/forum.php?mod=forumdisplay&fid=397" target="_blank" rel="noopener noreferrer" class="ext-link">
+                                Mobile01 汽車版 <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <span class="link-desc">台灣最大的車主討論區，分享真實用車經驗與評價。</span>
+                        </li>
+                        <li>
+                            <a href="https://autos.yahoo.com.tw/" target="_blank" rel="noopener noreferrer" class="ext-link">
+                                Yahoo奇摩汽車 <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <span class="link-desc">提供最新的汽車新聞、專業試駕報導與市場資訊。</span>
+                        </li>
+                        <li>
+                            <a href="https://www.8891.com.tw/" target="_blank" rel="noopener noreferrer" class="ext-link">
+                                8891汽車交易網 <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <span class="link-desc">台灣領先的汽車交易平台，提供豐富的新車與二手車源。</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="resource-card">
+                    <!-- 已修正：将失效的KBB链接替换为可靠的Cars.com -->
+                    <h4><i class="fas fa-globe-americas"></i> 國際網站</h4>
+                    <ul>
+                        <li>
+                            <a href="https://www.cars.com/" target="_blank" rel="noopener noreferrer" class="ext-link">
+                                Cars.com <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <span class="link-desc">美國權威汽車資訊與交易平台，提供專業車輛估值和市場分析。</span>
+                        </li>
+                        <li>
+                            <a href="https://www.edmunds.com/" target="_blank" rel="noopener noreferrer" class="ext-link">
+                                Edmunds <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <span class="link-desc">美國知名購車指南網站，以真實市場價格和深度評測著稱。</span>
+                        </li>
+                        <li>
+                            <a href="https://www.autoscout24.com/" target="_blank" rel="noopener noreferrer" class="ext-link">
+                                AutoScout24 <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <span class="link-desc">歐洲最大的汽車買賣平台，可瀏覽全歐洲的車輛資訊與行情。</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="resource-card">
+                    <h4><i class="fas fa-wrench"></i> 實用工具網站</h4>
+                    <ul>
+                        <li>
+                            <a href="https://www.fueleconomy.gov/" target="_blank" rel="noopener noreferrer" class="ext-link">
+                                Fuel Economy <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <span class="link-desc">美國官方油耗資訊網站，查詢各車型油耗數據最可靠的來源。</span>
+                        </li>
+                        <li>
+                            <a href="https://www.nhtsa.gov/" target="_blank" rel="noopener noreferrer" class="ext-link">
+                                NHTSA <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <span class="link-desc">美國國家公路交通安全管理局，查詢車輛安全評級與召回資訊。</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 返回首页链接 -->
+        <a href="index.html" class="btn btn-back"><i class="fas fa-arrow-left"></i> 返回首頁</a>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="site-footer">
+        <div class="footer-links">
+            <a href="index.html">首頁</a>
+            <a href="cars.html">車輛列表</a>
+            <a href="knowledge.html">知識庫</a>
+            <a href="contact.html">聯絡我們</a>
+            <a href="partners.html">協力廠商</a>
         </div>
-        
-        <div class="website-card">
-          <h4><i class="fas fa-globe-americas"></i> 國際網站</h4>
-          <ul>
-            <li>
-              <a href="https://www.caranddriver.com/" target="_blank" rel="noopener noreferrer" class="external-link">
-                Car and Driver <i class="fas fa-external-link-alt"></i>
-              </a>
-              <div class="website-description">美國專業汽車雜誌，詳細評測與報導</div>
-            </li>
-            <li>
-              <a href="https://www.motortrend.com/" target="_blank" rel="noopener noreferrer" class="external-link">
-                Motor Trend <i class="fas fa-external-link-alt"></i>
-              </a>
-              <div class="website-description">美國汽車媒體，關注汽車趨勢與技術</div>
-            </li>
-            <li>
-              <a href="https://www.topgear.com/" target="_blank" rel="noopener noreferrer" class="external-link">
-                Top Gear <i class="fas fa-external-link-alt"></i>
-              </a>
-              <div class="website-description">英國知名汽車媒體，趣味與專業並重</div>
-            </li>
-            <li>
-              <a href="https://www.edmunds.com/" target="_blank" rel="noopener noreferrer" class="external-link">
-                Edmunds <i class="fas fa-external-link-alt"></i>
-              </a>
-              <div class="website-description">美國購車指南與車輛評價網站</div>
-            </li>
-            <li>
-              <a href="https://www.kbb.ca/" target="_blank" rel="noopener noreferrer" class="external-link">
-                Kelley Blue Book (加拿大) <i class="fas fa-external-link-alt"></i>
-              </a>
-              <div class="website-description">加拿大版車輛估價網站，二手車價格參考</div>
-            </li>
-            <li>
-              <a href="https://www.autoscout24.com/" target="_blank" rel="noopener noreferrer" class="external-link">
-                AutoScout24 <i class="fas fa-external-link-alt"></i>
-              </a>
-              <div class="website-description">歐洲最大汽車買賣平台，涵蓋全歐洲車源</div>
-            </li>
-          </ul>
+        <div class="copyright">
+            <p>&copy; 2025 漢新二手車專賣 版權所有</p>
+            <p>本網站僅供學習使用，非實際營業網站</p>
         </div>
-        
-        <div class="website-card">
-          <h4><i class="fas fa-wrench"></i> 實用工具網站</h4>
-          <ul>
-            <li>
-              <a href="https://www.fueleconomy.gov/" target="_blank" rel="noopener noreferrer" class="external-link">
-                Fuel Economy <i class="fas fa-external-link-alt"></i>
-              </a>
-              <div class="website-description">美國官方油耗資訊網站</div>
-            </li>
-            <li>
-              <a href="https://www.nhtsa.gov/" target="_blank" rel="noopener noreferrer" class="external-link">
-                NHTSA <i class="fas fa-external-link-alt"></i>
-              </a>
-              <div class="website-description">美國國家公路交通安全管理局</div>
-            </li>
-            <li>
-              <a href="https://www.iihs.org/" target="_blank" rel="noopener noreferrer" class="external-link">
-                IIHS <i class="fas fa-external-link-alt"></i>
-              </a>
-              <div class="website-description">美國公路安全保險協會，撞擊測試結果</div>
-            </li>
-            <li>
-              <a href="https://www.fuelly.com/" target="_blank" rel="noopener noreferrer" class="external-link">
-                Fuelly <i class="fas fa-external-link-alt"></i>
-              </a>
-              <div class="website-description">油耗追蹤與分享工具</div>
-            </li>
-            <li>
-              <a href="https://repairpal.com/" target="_blank" rel="noopener noreferrer" class="external-link">
-                RepairPal <i class="fas fa-external-link-alt"></i>
-              </a>
-              <div class="website-description">汽車維修估價與技師查找工具</div>
-            </li>
-          </ul>
-        </div>
-        
-        <div class="website-card">
-          <h4><i class="fas fa-landmark"></i> 政府與官方資源</h4>
-          <ul>
-            <li>
-              <a href="https://www.mvdis.gov.tw/" target="_blank" rel="noopener noreferrer" class="external-link">
-                監理服務網 <i class="fas fa-external-link-alt"></i>
-              </a>
-              <div class="website-description">牌照、駕照業務與車輛資訊查詢</div>
-            </li>
-            <li>
-              <a href="https://www.artc.org.tw/" target="_blank" rel="noopener noreferrer" class="external-link">
-                車輛安全審驗中心 <i class="fas fa-external-link-alt"></i>
-              </a>
-              <div class="website-description">車輛安全法規與審驗資訊</div>
-            </li>
-            <li>
-              <a href="https://www.freeway.gov.tw/" target="_blank" rel="noopener noreferrer" class="external-link">
-                高速公路局 <i class="fas fa-external-link-alt"></i>
-              </a>
-              <div class="website-description">即時路況與交通資訊</div>
-            </li>
-            <li>
-              <a href="https://www.thb.gov.tw/" target="_blank" rel="noopener noreferrer" class="external-link">
-                公路總局 <i class="fas fa-external-link-alt"></i>
-              </a>
-              <div class="website-description">公路交通資訊與政策</div>
-            </li>
-            <li>
-              <a href="https://www.caa.gov.tw/" target="_blank" rel="noopener noreferrer" class="external-link">
-                消保會 <i class="fas fa-external-link-alt"></i>
-              </a>
-              <div class="website-description">消費者保護與申訴管道</div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
-    
-    <!-- 返回首頁連結 -->
-    <div style="text-align: center; margin-top: 40px;">
-      <a href="index.html" class="back-button"><i class="fas fa-arrow-left"></i> 返回首頁</a>
-    </div>
-  </main>
+    </footer>
 
-  <footer>
-    <div class="footer-links">
-      <a href="index.html"><i class="fas fa-home"></i> 首頁</a>
-      <a href="cars.html"><i class="fas fa-car"></i> 車輛列表</a>
-      <a href="knowledge.html"><i class="fas fa-book"></i> 知識庫</a>
-      <a href="contact.html"><i class="fas fa-phone"></i> 聯絡我們</a>
-      <a href="partners.html"><i class="fas fa-handshake"></i> 協力廠商</a>
-    </div>
-    <div class="copyright">
-      <p>&copy; 2025 漢新二手車專賣 版權所有</p>
-      <p>本網站僅供學習使用，非實際營業網站</p>
-    </div>
-  </footer>
+    <script>
+        // 简单的交互增强：平滑滚动和当前导航高亮
+        document.addEventListener('DOMContentLoaded', function() {
+            // 为所有站内锚点链接添加平滑滚动
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    if (href !== '#') {
+                        e.preventDefault();
+                        const targetElement = document.querySelector(href);
+                        if (targetElement) {
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 80,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
 
-  <!-- 簡單的滾動效果 -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // 平滑滾動到錨點
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-          const targetId = this.getAttribute('href');
-          if (targetId !== '#') {
-            e.preventDefault();
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-              window.scrollTo({
-                top: targetElement.offsetTop - 80,
-                behavior: 'smooth'
-              });
-            }
-          }
+            // 根据滚动位置高亮当前导航项
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        const currentNavLink = document.querySelector(`.main-nav a[href="#${id}"]`);
+                        if (currentNavLink) {
+                            document.querySelectorAll('.main-nav a').forEach(link => link.classList.remove('current'));
+                            currentNavLink.classList.add('current');
+                        }
+                    }
+                });
+            }, { rootMargin: '-20% 0px -80% 0px' });
+
+            // 观察所有主要内容区块
+            document.querySelectorAll('.category-section').forEach(section => {
+                sectionObserver.observe(section);
+            });
         });
-      });
-      
-      // 高亮當前部分
-      const sections = document.querySelectorAll('.knowledge-category');
-      const navLinks = document.querySelectorAll('nav a');
-      
-      function highlightCurrentSection() {
-        let currentSectionId = '';
-        
-        sections.forEach(section => {
-          const sectionTop = section.offsetTop - 100;
-          const sectionHeight = section.clientHeight;
-          if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
-            currentSectionId = section.id;
-          }
-        });
-        
-        navLinks.forEach(link => {
-          link.classList.remove('active');
-          if (link.getAttribute('href') === `#${currentSectionId}`) {
-            link.classList.add('active');
-          }
-        });
-      }
-      
-      window.addEventListener('scroll', highlightCurrentSection);
-      highlightCurrentSection(); // 初始執行
-    });
-  </script>
+    </script>
 </body>
 </html>
