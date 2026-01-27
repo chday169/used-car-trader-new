@@ -3,130 +3,226 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>車主知識庫 - 漢新二手車</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>車主知識庫 - 漢新二手車專賣</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    /* 重置樣式 */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
     /* 知識庫專用樣式 */
     body {
       font-family: 'Segoe UI', 'Microsoft JhengHei', Arial, sans-serif;
       margin: 0;
       padding: 0;
       line-height: 1.6;
+      color: #333;
     }
     
     header {
-      background: #333;
+      background: linear-gradient(135deg, #333 0%, #555 100%);
       color: white;
       padding: 20px;
       text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
     
     header h1 {
-      margin: 0;
-      font-size: 2em;
+      margin: 0 0 10px 0;
+      font-size: 2.2em;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    }
+    
+    .header-subtitle {
+      font-size: 1em;
+      color: #ddd;
+      margin-bottom: 15px;
     }
     
     nav {
       margin-top: 15px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 5px;
     }
     
     nav a {
       color: white;
       text-decoration: none;
-      margin: 0 10px;
       font-weight: bold;
-      padding: 5px 10px;
+      padding: 8px 15px;
       border-radius: 4px;
-      transition: background 0.3s;
+      transition: all 0.3s ease;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
     }
     
     nav a:hover {
       background: #007bff;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
       text-decoration: none;
+    }
+    
+    nav a i {
+      margin-right: 5px;
     }
     
     main {
       padding: 20px;
       max-width: 1200px;
       margin: 0 auto;
+      min-height: 70vh;
     }
     
     section {
-      margin: 30px 0;
+      margin: 40px 0;
     }
     
     h2 {
       color: #333;
       border-bottom: 2px solid #007bff;
       padding-bottom: 10px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    h2 i {
+      color: #007bff;
     }
     
     h3 {
       color: #007bff;
       margin-top: 20px;
+      margin-bottom: 10px;
     }
     
     /* 知識庫類別樣式 */
     .knowledge-category {
-      margin: 30px 0;
-      padding: 20px;
+      margin: 40px 0;
+      padding: 25px;
       background: #f8f9fa;
-      border-radius: 8px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     }
     
     .article-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 20px;
-      margin-top: 20px;
+      gap: 25px;
+      margin-top: 25px;
     }
     
     .knowledge-card {
       background: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
     }
     
     .knowledge-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    
+    .knowledge-card h3 {
+      color: #007bff;
+      border-bottom: 2px solid #f0f0f0;
+      padding-bottom: 10px;
+      margin-top: 0;
     }
     
     .tech-table {
       width: 100%;
       border-collapse: collapse;
       margin: 15px 0;
+      font-size: 0.95em;
     }
     
     .tech-table th, .tech-table td {
       border: 1px solid #ddd;
-      padding: 10px;
+      padding: 12px;
       text-align: left;
     }
     
     .tech-table th {
       background: #f2f2f2;
+      font-weight: bold;
+      color: #333;
+    }
+    
+    .tech-table tr:nth-child(even) {
+      background: #f9f9f9;
+    }
+    
+    .tech-table tr:hover {
+      background: #f0f8ff;
     }
     
     .website-links {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 15px;
+      gap: 20px;
     }
     
     .website-card {
       border: 1px solid #e0e0e0;
-      padding: 15px;
-      border-radius: 6px;
+      padding: 20px;
+      border-radius: 8px;
       background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+      height: 100%;
+    }
+    
+    .website-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
     
     .website-card h4 {
       margin-top: 0;
       color: #007bff;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .website-card h4 i {
+      font-size: 1.2em;
+    }
+    
+    .website-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .website-card li {
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px dashed #eee;
+    }
+    
+    .website-card li:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
     }
     
     /* 安全提示樣式 */
@@ -136,68 +232,125 @@
     }
     
     .tip {
-      padding: 15px;
+      padding: 20px;
       background: #e8f4fd;
-      border-radius: 6px;
-      border-left: 4px solid #17a2b8;
+      border-radius: 8px;
+      border-left: 5px solid #17a2b8;
+      transition: all 0.3s ease;
+    }
+    
+    .tip:hover {
+      background: #d9edf7;
+      transform: translateX(5px);
     }
     
     .tip h4 {
       margin-top: 0;
       color: #17a2b8;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
     
     /* 注意事項框 */
     .note-box {
-      background: #fff3cd;
+      background: linear-gradient(to right, #fff3cd, #ffeaa7);
       border: 1px solid #ffeaa7;
-      border-radius: 6px;
-      padding: 15px;
-      margin: 20px 0;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 25px 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
     
     .note-box h4 {
       color: #856404;
       margin-top: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
     
     /* 外部連結樣式 */
     .external-link {
       color: #007bff;
       text-decoration: none;
-      font-weight: bold;
-      transition: color 0.3s;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
     }
     
     .external-link:hover {
       color: #0056b3;
       text-decoration: underline;
+      transform: translateX(3px);
     }
     
     .external-link i {
-      margin-left: 5px;
-      font-size: 0.9em;
+      font-size: 0.85em;
+      transition: transform 0.3s ease;
+    }
+    
+    .external-link:hover i {
+      transform: translateX(3px);
     }
     
     /* 返回按鈕 */
     .back-button {
-      display: inline-block;
-      background: #6c757d;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #6c757d 0%, #545b62 100%);
       color: white;
-      padding: 10px 20px;
+      padding: 12px 25px;
       text-decoration: none;
-      border-radius: 4px;
+      border-radius: 6px;
       font-weight: bold;
-      transition: background 0.3s;
+      transition: all 0.3s ease;
       margin-top: 20px;
+      border: none;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
     }
     
     .back-button:hover {
-      background: #545b62;
+      background: linear-gradient(135deg, #545b62 0%, #3d4246 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      color: white;
+      text-decoration: none;
+    }
+    
+    /* 網站連結說明 */
+    .website-description {
+      font-size: 0.9em;
+      color: #666;
+      margin-top: 5px;
+      line-height: 1.5;
     }
     
     /* 響應式設計 */
     @media (max-width: 768px) {
+      header {
+        padding: 15px;
+      }
+      
+      header h1 {
+        font-size: 1.8em;
+      }
+      
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      nav a {
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+        margin-bottom: 5px;
+      }
+      
       .article-grid {
         grid-template-columns: 1fr;
       }
@@ -206,48 +359,94 @@
         grid-template-columns: 1fr;
       }
       
-      nav a {
-        display: inline-block;
-        margin: 5px;
-        padding: 8px 12px;
+      main {
+        padding: 15px;
+      }
+      
+      .knowledge-category {
+        padding: 15px;
+      }
+      
+      .knowledge-card {
+        padding: 20px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 1.5em;
+      }
+      
+      .header-subtitle {
+        font-size: 0.9em;
       }
     }
     
     /* 頁尾樣式 */
     footer {
-      background: #333;
+      background: linear-gradient(135deg, #333 0%, #222 100%);
       color: white;
-      margin-top: 40px;
+      margin-top: 60px;
       text-align: center;
-      padding: 20px;
+      padding: 30px 20px 20px;
     }
     
     footer p {
-      margin: 5px 0;
+      margin: 10px 0;
     }
     
     .footer-links {
-      margin-top: 15px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
     }
     
     .footer-links a {
       color: #ddd;
       text-decoration: none;
-      margin: 0 10px;
-      padding: 5px 10px;
+      padding: 8px 15px;
       border-radius: 4px;
-      transition: background 0.3s;
+      transition: all 0.3s ease;
+      background: rgba(255,255,255,0.05);
     }
     
     .footer-links a:hover {
       color: white;
       background: rgba(255,255,255,0.1);
+      text-decoration: none;
+    }
+    
+    .copyright {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: #aaa;
+      font-size: 0.9em;
+    }
+    
+    /* 解決 Quirks 模式警告 */
+    html {
+      height: 100%;
+    }
+    
+    body {
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    main {
+      flex: 1;
     }
   </style>
 </head>
 <body>
   <header>
     <h1>車主實用知識庫</h1>
+    <p class="header-subtitle">漢新二手車專賣 - 專業汽車知識與資源分享</p>
     <nav>
       <a href="index.html"><i class="fas fa-home"></i> 首頁</a>
       <a href="cars.html"><i class="fas fa-car"></i> 車輛列表</a>
@@ -380,65 +579,168 @@
     <!-- 國內外汽車網站連結 -->
     <section class="knowledge-category" id="resources">
       <h2><i class="fas fa-link"></i> 汽車資訊網站推薦</h2>
-      <div class="website-links">
-        <div class="website-card">
-          <h4>國內網站</h4>
-          <ul>
-            <!-- 修正 Mobile01 連結 -->
-            <li><a href="https://www.mobile01.com/category.php?id=4" target="_blank" rel="noopener noreferrer" class="external-link">Mobile01 汽車版 <i class="fas fa-external-link-alt"></i></a> - 台灣最大車主討論區</li>
-            <li><a href="https://autos.yahoo.com.tw/" target="_blank" rel="noopener noreferrer" class="external-link">Yahoo奇摩汽車 <i class="fas fa-external-link-alt"></i></a> - 新聞與試駕報導</li>
-            <li><a href="https://www.7car.tw/" target="_blank" rel="noopener noreferrer" class="external-link">七汽車網 <i class="fas fa-external-link-alt"></i></a> - 台灣汽車資訊</li>
-            <li><a href="https://www.carnews.com/" target="_blank" rel="noopener noreferrer" class="external-link">車訊網 <i class="fas fa-external-link-alt"></i></a> - 專業汽車媒體</li>
-            <li><a href="https://motor.u-car.com.tw/" target="_blank" rel="noopener noreferrer" class="external-link">U-CAR <i class="fas fa-external-link-alt"></i></a> - 新車與二手車資訊</li>
-            <li><a href="https://www.8891.com.tw/" target="_blank" rel="noopener noreferrer" class="external-link">8891汽車交易網 <i class="fas fa-external-link-alt"></i></a> - 台灣最大汽車交易平台</li>
-          </ul>
-        </div>
-        
-        <div class="website-card">
-          <h4>國際網站</h4>
-          <ul>
-            <li><a href="https://www.caranddriver.com/" target="_blank" rel="noopener noreferrer" class="external-link">Car and Driver <i class="fas fa-external-link-alt"></i></a> - 專業評測</li>
-            <li><a href="https://www.motortrend.com/" target="_blank" rel="noopener noreferrer" class="external-link">Motor Trend <i class="fas fa-external-link-alt"></i></a> - 汽車趨勢</li>
-            <li><a href="https://www.topgear.com/" target="_blank" rel="noopener noreferrer" class="external-link">Top Gear <i class="fas fa-external-link-alt"></i></a> - 英國汽車媒體</li>
-            <li><a href="https://www.edmunds.com/" target="_blank" rel="noopener noreferrer" class="external-link">Edmunds <i class="fas fa-external-link-alt"></i></a> - 美國購車指南</li>
-            <!-- 修正 Kelley Blue Book 連結 -->
-            <li><a href="https://www.kbb.com/" target="_blank" rel="noopener noreferrer" class="external-link">Kelley Blue Book <i class="fas fa-external-link-alt"></i></a> - 美國車輛估價權威</li>
-            <li><a href="https://www.autoscout24.com/" target="_blank" rel="noopener noreferrer" class="external-link">AutoScout24 <i class="fas fa-external-link-alt"></i></a> - 歐洲最大汽車買賣平台</li>
-          </ul>
-        </div>
-        
-        <div class="website-card">
-          <h4>實用工具網站</h4>
-          <ul>
-            <li><a href="https://www.fueleconomy.gov/" target="_blank" rel="noopener noreferrer" class="external-link">Fuel Economy <i class="fas fa-external-link-alt"></i></a> - 油耗資訊</li>
-            <li><a href="https://www.nhtsa.gov/" target="_blank" rel="noopener noreferrer" class="external-link">NHTSA <i class="fas fa-external-link-alt"></i></a> - 安全評級</li>
-            <li><a href="https://www.iihs.org/" target="_blank" rel="noopener noreferrer" class="external-link">IIHS <i class="fas fa-external-link-alt"></i></a> - 撞擊測試結果</li>
-            <li><a href="https://www.fuelly.com/" target="_blank" rel="noopener noreferrer" class="external-link">Fuelly <i class="fas fa-external-link-alt"></i></a> - 油耗追蹤工具</li>
-            <li><a href="https://repairpal.com/" target="_blank" rel="noopener noreferrer" class="external-link">RepairPal <i class="fas fa-external-link-alt"></i></a> - 維修估價工具</li>
-          </ul>
-        </div>
-        
-        <div class="website-card">
-          <h4>政府與官方資源</h4>
-          <ul>
-            <li><a href="https://www.mvdis.gov.tw/" target="_blank" rel="noopener noreferrer" class="external-link">監理服務網 <i class="fas fa-external-link-alt"></i></a> - 牌照、駕照業務</li>
-            <li><a href="https://www.artc.org.tw/" target="_blank" rel="noopener noreferrer" class="external-link">車輛安全審驗中心 <i class="fas fa-external-link-alt"></i></a></li>
-            <li><a href="https://www.freeway.gov.tw/" target="_blank" rel="noopener noreferrer" class="external-link">高速公路局 <i class="fas fa-external-link-alt"></i></a> - 即時路況</li>
-            <li><a href="https://www.thb.gov.tw/" target="_blank" rel="noopener noreferrer" class="external-link">公路總局 <i class="fas fa-external-link-alt"></i></a> - 交通資訊</li>
-            <li><a href="https://www.caa.gov.tw/" target="_blank" rel="noopener noreferrer" class="external-link">消保會 <i class="fas fa-external-link-alt"></i></a> - 消費者保護</li>
-          </ul>
-        </div>
-      </div>
       
       <div class="note-box">
-        <h4><i class="fas fa-external-link-alt"></i> 外部連結說明</h4>
-        <p>點擊外部網站連結將會離開本網站，前往第三方網站。請注意第三方網站的隱私政策與使用條款。</p>
-        <p><strong>推薦理由：</strong></p>
-        <ul>
-          <li><strong>8891汽車交易網：</strong>台灣最大、最活躍的汽車交易平台，提供豐富的車源和交易資訊</li>
-          <li><strong>AutoScout24：</strong>歐洲最大的汽車買賣平台，適合尋找進口車或了解國際車市行情的用戶</li>
-          <li><strong>Kelley Blue Book：</strong>美國最權威的車輛估價網站，提供準確的二手車價格參考</li>
-        </ul>
+        <h4><i class="fas fa-info-circle"></i> 外部連結說明</h4>
+        <p>以下推薦的網站將幫助您了解更多汽車相關資訊。點擊外部網站連結將會離開本網站，前往第三方網站。請注意第三方網站的隱私政策與使用條款。</p>
+      </div>
+      
+      <div class="website-links">
+        <div class="website-card">
+          <h4><i class="fas fa-flag"></i> 台灣網站</h4>
+          <ul>
+            <li>
+              <a href="https://www.mobile01.com/forum.php?mod=forumdisplay&fid=397" target="_blank" rel="noopener noreferrer" class="external-link">
+                Mobile01 汽車版 <i class="fas fa-external-link-alt"></i>
+              </a>
+              <div class="website-description">台灣最大的車主討論區，分享用車經驗與評價</div>
+            </li>
+            <li>
+              <a href="https://autos.yahoo.com.tw/" target="_blank" rel="noopener noreferrer" class="external-link">
+                Yahoo奇摩汽車 <i class="fas fa-external-link-alt"></i>
+              </a>
+              <div class="website-description">新聞、試駕報導與汽車資訊</div>
+            </li>
+            <li>
+              <a href="https://www.7car.tw/" target="_blank" rel="noopener noreferrer" class="external-link">
+                七汽車網 <i class="fas fa-external-link-alt"></i>
+              </a>
+              <div class="website-description">台灣汽車新聞與資訊平台</div>
+            </li>
+            <li>
+              <a href="https://www.carnews.com/" target="_blank" rel="noopener noreferrer" class="external-link">
+                車訊網 <i class="fas fa-external-link-alt"></i>
+              </a>
+              <div class="website-description">專業汽車媒體與評測報導</div>
+            </li>
+            <li>
+              <a href="https://motor.u-car.com.tw/" target="_blank" rel="noopener noreferrer" class="external-link">
+                U-CAR <i class="fas fa-external-link-alt"></i>
+              </a>
+              <div class="website-description">新車與二手車資訊、專業評測</div>
+            </li>
+            <li>
+              <a href="https://www.8891.com.tw/" target="_blank" rel="noopener noreferrer" class="external-link">
+                8891汽車交易網 <i class="fas fa-external-link-alt"></i>
+              </a>
+              <div class="website-description">台灣最大汽車交易平台，豐富車源資訊</div>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="website-card">
+          <h4><i class="fas fa-globe-americas"></i> 國際網站</h4>
+          <ul>
+            <li>
+              <a href="https://www.caranddriver.com/" target="_blank" rel="noopener noreferrer" class="external-link">
+                Car and Driver <i class="fas fa-external-link-alt"></i>
+              </a>
+              <div class="website-description">美國專業汽車雜誌，詳細評測與報導</div>
+            </li>
+            <li>
+              <a href="https://www.motortrend.com/" target="_blank" rel="noopener noreferrer" class="external-link">
+                Motor Trend <i class="fas fa-external-link-alt"></i>
+              </a>
+              <div class="website-description">美國汽車媒體，關注汽車趨勢與技術</div>
+            </li>
+            <li>
+              <a href="https://www.topgear.com/" target="_blank" rel="noopener noreferrer" class="external-link">
+                Top Gear <i class="fas fa-external-link-alt"></i>
+              </a>
+              <div class="website-description">英國知名汽車媒體，趣味與專業並重</div>
+            </li>
+            <li>
+              <a href="https://www.edmunds.com/" target="_blank" rel="noopener noreferrer" class="external-link">
+                Edmunds <i class="fas fa-external-link-alt"></i>
+              </a>
+              <div class="website-description">美國購車指南與車輛評價網站</div>
+            </li>
+            <li>
+              <a href="https://www.kbb.com/" target="_blank" rel="noopener noreferrer" class="external-link">
+                Kelley Blue Book <i class="fas fa-external-link-alt"></i>
+              </a>
+              <div class="website-description">美國權威車輛估價網站，二手車價格參考</div>
+            </li>
+            <li>
+              <a href="https://www.autoscout24.com/" target="_blank" rel="noopener noreferrer" class="external-link">
+                AutoScout24 <i class="fas fa-external-link-alt"></i>
+              </a>
+              <div class="website-description">歐洲最大汽車買賣平台，涵蓋全歐洲車源</div>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="website-card">
+          <h4><i class="fas fa-wrench"></i> 實用工具網站</h4>
+          <ul>
+            <li>
+              <a href="https://www.fueleconomy.gov/" target="_blank" rel="noopener noreferrer" class="external-link">
+                Fuel Economy <i class="fas fa-external-link-alt"></i>
+              </a>
+              <div class="website-description">美國官方油耗資訊網站</div>
+            </li>
+            <li>
+              <a href="https://www.nhtsa.gov/" target="_blank" rel="noopener noreferrer" class="external-link">
+                NHTSA <i class="fas fa-external-link-alt"></i>
+              </a>
+              <div class="website-description">美國國家公路交通安全管理局</div>
+            </li>
+            <li>
+              <a href="https://www.iihs.org/" target="_blank" rel="noopener noreferrer" class="external-link">
+                IIHS <i class="fas fa-external-link-alt"></i>
+              </a>
+              <div class="website-description">美國公路安全保險協會，撞擊測試結果</div>
+            </li>
+            <li>
+              <a href="https://www.fuelly.com/" target="_blank" rel="noopener noreferrer" class="external-link">
+                Fuelly <i class="fas fa-external-link-alt"></i>
+              </a>
+              <div class="website-description">油耗追蹤與分享工具</div>
+            </li>
+            <li>
+              <a href="https://repairpal.com/" target="_blank" rel="noopener noreferrer" class="external-link">
+                RepairPal <i class="fas fa-external-link-alt"></i>
+              </a>
+              <div class="website-description">汽車維修估價與技師查找工具</div>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="website-card">
+          <h4><i class="fas fa-landmark"></i> 政府與官方資源</h4>
+          <ul>
+            <li>
+              <a href="https://www.mvdis.gov.tw/" target="_blank" rel="noopener noreferrer" class="external-link">
+                監理服務網 <i class="fas fa-external-link-alt"></i>
+              </a>
+              <div class="website-description">牌照、駕照業務與車輛資訊查詢</div>
+            </li>
+            <li>
+              <a href="https://www.artc.org.tw/" target="_blank" rel="noopener noreferrer" class="external-link">
+                車輛安全審驗中心 <i class="fas fa-external-link-alt"></i>
+              </a>
+              <div class="website-description">車輛安全法規與審驗資訊</div>
+            </li>
+            <li>
+              <a href="https://www.freeway.gov.tw/" target="_blank" rel="noopener noreferrer" class="external-link">
+                高速公路局 <i class="fas fa-external-link-alt"></i>
+              </a>
+              <div class="website-description">即時路況與交通資訊</div>
+            </li>
+            <li>
+              <a href="https://www.thb.gov.tw/" target="_blank" rel="noopener noreferrer" class="external-link">
+                公路總局 <i class="fas fa-external-link-alt"></i>
+              </a>
+              <div class="website-description">公路交通資訊與政策</div>
+            </li>
+            <li>
+              <a href="https://www.caa.gov.tw/" target="_blank" rel="noopener noreferrer" class="external-link">
+                消保會 <i class="fas fa-external-link-alt"></i>
+              </a>
+              <div class="website-description">消費者保護與申訴管道</div>
+            </li>
+          </ul>
+        </div>
       </div>
     </section>
     
@@ -450,14 +752,16 @@
 
   <footer>
     <div class="footer-links">
-      <a href="index.html">首頁</a>
-      <a href="cars.html">車輛列表</a>
-      <a href="knowledge.html">知識庫</a>
-      <a href="contact.html">聯絡我們</a>
-      <a href="partners.html">協力廠商</a>
+      <a href="index.html"><i class="fas fa-home"></i> 首頁</a>
+      <a href="cars.html"><i class="fas fa-car"></i> 車輛列表</a>
+      <a href="knowledge.html"><i class="fas fa-book"></i> 知識庫</a>
+      <a href="contact.html"><i class="fas fa-phone"></i> 聯絡我們</a>
+      <a href="partners.html"><i class="fas fa-handshake"></i> 協力廠商</a>
     </div>
-    <p>&copy; 2025 漢新二手車專賣</p>
-    <p>本網站僅供學習使用，非實際營業網站</p>
+    <div class="copyright">
+      <p>&copy; 2025 漢新二手車專賣 版權所有</p>
+      <p>本網站僅供學習使用，非實際營業網站</p>
+    </div>
   </footer>
 </body>
 </html>
