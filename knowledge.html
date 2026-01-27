@@ -2,13 +2,14 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>車主知識庫 - 漢新二手車</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     /* 知識庫專用樣式 */
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', 'Microsoft JhengHei', Arial, sans-serif;
       margin: 0;
       padding: 0;
       line-height: 1.6;
@@ -35,10 +36,14 @@
       text-decoration: none;
       margin: 0 10px;
       font-weight: bold;
+      padding: 5px 10px;
+      border-radius: 4px;
+      transition: background 0.3s;
     }
     
     nav a:hover {
-      text-decoration: underline;
+      background: #007bff;
+      text-decoration: none;
     }
     
     main {
@@ -82,6 +87,12 @@
       padding: 20px;
       border-radius: 8px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    
+    .knowledge-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
     }
     
     .tech-table {
@@ -150,6 +161,24 @@
       margin-top: 0;
     }
     
+    /* 外部連結樣式 */
+    .external-link {
+      color: #007bff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    
+    .external-link:hover {
+      color: #0056b3;
+      text-decoration: underline;
+    }
+    
+    .external-link i {
+      margin-left: 5px;
+      font-size: 0.9em;
+    }
+    
     /* 返回按鈕 */
     .back-button {
       display: inline-block;
@@ -176,6 +205,12 @@
       .website-links {
         grid-template-columns: 1fr;
       }
+      
+      nav a {
+        display: inline-block;
+        margin: 5px;
+        padding: 8px 12px;
+      }
     }
     
     /* 頁尾樣式 */
@@ -199,10 +234,14 @@
       color: #ddd;
       text-decoration: none;
       margin: 0 10px;
+      padding: 5px 10px;
+      border-radius: 4px;
+      transition: background 0.3s;
     }
     
     .footer-links a:hover {
       color: white;
+      background: rgba(255,255,255,0.1);
     }
   </style>
 </head>
@@ -210,10 +249,10 @@
   <header>
     <h1>車主實用知識庫</h1>
     <nav>
-      <a href="index.html"><i class="fas fa-home"></i> 首頁</a> |
-      <a href="cars.html"><i class="fas fa-car"></i> 車輛列表</a> |
-      <a href="knowledge.html"><i class="fas fa-book"></i> 知識庫</a> |
-      <a href="contact.html"><i class="fas fa-phone"></i> 聯絡我們</a> |
+      <a href="index.html"><i class="fas fa-home"></i> 首頁</a>
+      <a href="cars.html"><i class="fas fa-car"></i> 車輛列表</a>
+      <a href="knowledge.html"><i class="fas fa-book"></i> 知識庫</a>
+      <a href="contact.html"><i class="fas fa-phone"></i> 聯絡我們</a>
       <a href="partners.html"><i class="fas fa-handshake"></i> 協力廠商</a>
     </nav>
   </header>
@@ -271,7 +310,7 @@
       </div>
     </section>
 
-    <!-- 駕駛安全規則（合併高速公路注意事項） -->
+    <!-- 駕駛安全規則 -->
     <section class="knowledge-category" id="safety">
       <h2><i class="fas fa-shield-alt"></i> 汽車駕駛安全規則</h2>
       <div class="article-grid">
@@ -290,16 +329,7 @@
               <h4><i class="fas fa-road"></i> 安全距離保持</h4>
               <p>時速100公里時，至少保持50公尺車距；雨天加倍。使用「三秒法則」確保安全距離。</p>
             </div>
-            <div class="tip">
-              <h4><i class="fas fa-ban"></i> 禁止行為</h4>
-              <p>嚴禁疲勞駕駛、隨意變換車道、路肩超車、倒車或迴轉。酒精濃度超過標準嚴禁駕車。</p>
-            </div>
-            <div class="tip">
-              <h4><i class="fas fa-exclamation-triangle"></i> 特殊情況處理</h4>
-              <p>遇事故：開啟危險警告燈→放置三角警告標誌→退至安全處→撥打110或1968求助。</p>
-            </div>
           </div>
-          <p><a href="safety002.html" class="back-button">查看完整高速公路指南 →</a></p>
         </article>
 
         <article class="knowledge-card">
@@ -312,52 +342,6 @@
             <li><strong>禮讓原則：</strong>禮讓行人、優先讓行救護車輛，不爭道搶行</li>
           </ul>
         </article>
-
-        <article class="knowledge-card">
-          <h3>特殊天氣駕駛要點</h3>
-          <ul>
-            <li><strong>雨天：</strong>減速30%，開啟頭燈，避免急煞，注意水漂現象。雨勢過大時應停靠安全處</li>
-            <li><strong>霧天：</strong>使用霧燈（非遠光燈），保持低速，沿車道線行駛，必要時開啟危險燈</li>
-            <li><strong>夜間：</strong>合理使用遠近光燈，注意行人及動物，增加跟車距離，定期清潔燈罩</li>
-            <li><strong>山區：</strong>下坡用低速檔，轉彎鳴喇叭，注意落石，避免空檔滑行</li>
-            <li><strong>強風：</strong>緊握方向盤，減速慢行，特別注意高架橋與空曠路段</li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
-    <!-- 高速公路專區 -->
-    <section class="knowledge-category">
-      <h2><i class="fas fa-road"></i> 高速公路駕駛應注意事項</h2>
-      <div class="knowledge-card">
-        <h3>台灣高速公路行車須知</h3>
-        <h4>速限規定</h4>
-        <ul>
-          <li>一般路段：小型車100-110km/h，大型車80-90km/h</li>
-          <li>特殊路段：依標誌指示，施工路段通常降為60-80km/h</li>
-          <li>雨天建議：降低車速20-30%</li>
-        </ul>
-        
-        <h4>收費與ETC</h4>
-        <ul>
-          <li>全線電子收費（ETC），無人工收費站</li>
-          <li>小型車費率每公里約1.2元</li>
-          <li>未裝eTag可事後補繳，逾期有罰款</li>
-        </ul>
-        
-        <h4>服務區與休息站</h4>
-        <ul>
-          <li>每隔約50公里設有服務區</li>
-          <li>建議每駕駛2小時休息15分鐘</li>
-          <li>主要服務區：關西、西湖、清水、南投等</li>
-        </ul>
-        
-        <h4>高乘載管制</h4>
-        <ul>
-          <li>連續假期特定時段實施</li>
-          <li>小型車需乘載3人以上（含駕駛）</li>
-          <li>管制時間前會提前公告</li>
-        </ul>
       </div>
     </section>
 
@@ -388,60 +372,7 @@
               <td>偵測車道線，提醒駕駛維持車道</td>
               <td>Ford Focus, Volkswagen Golf</td>
             </tr>
-            <tr>
-              <td>BSM 盲點偵測</td>
-              <td>監測車輛盲區，變換車道時警示</td>
-              <td>Hyundai Tucson, Kia Sportage</td>
-            </tr>
-            <tr>
-              <td>360度環景影像</td>
-              <td>提供車輛四周鳥瞰視圖，方便停車</td>
-              <td>Luxgen URX, Toyota Alphard</td>
-            </tr>
           </table>
-        </article>
-
-        <article class="knowledge-card">
-          <h3>新能源車技術發展</h3>
-          <h4>電動車 (EV)</h4>
-          <ul>
-            <li>續航里程：主流車型已達400-600公里</li>
-            <li>充電技術：快充30分鐘可達80%電量</li>
-            <li>代表車款：Tesla Model 3, Nissan Leaf</li>
-            <li>政府補助：國內有電動車購車補助及免稅優惠</li>
-          </ul>
-          
-          <h4>油電混合車 (HEV/PHEV)</h4>
-          <ul>
-            <li>油耗表現：較傳統汽油車節省30-50%</li>
-            <li>純電行駛：PHEV車型可純電行駛50-80公里</li>
-            <li>代表車款：Toyota Prius, Mitsubishi Outlander PHEV</li>
-            <li>優勢：無里程焦慮，適合國內使用環境</li>
-          </ul>
-          
-          <h4>氫燃料電池車 (FCEV)</h4>
-          <ul>
-            <li>加氫時間：約3-5分鐘</li>
-            <li>行駛里程：超過600公里</li>
-            <li>代表車款：Toyota Mirai, Hyundai Nexo</li>
-            <li>現況：台灣加氫站尚在建設中</li>
-          </ul>
-        </article>
-
-        <article class="knowledge-card">
-          <h3>車聯網與智慧座艙</h3>
-          <ul>
-            <li><strong>V2X車聯網：</strong>車輛與基礎設施通訊，預警交通狀況</li>
-            <li><strong>數位儀表板：</strong>全液晶顯示，自定義資訊佈局</li>
-            <li><strong>抬頭顯示器：</strong>投影行車資訊於擋風玻璃</li>
-            <li><strong>智慧語音助理：</strong>聲控操作多媒體、導航、空調</li>
-            <li><strong>OTA線上更新：</strong>無線更新系統軟體與地圖</li>
-            <li><strong>生物辨識：</strong>臉部辨識啟動車輛，疲勞駕駛偵測</li>
-          </ul>
-          <div class="note-box">
-            <h4><i class="fas fa-chart-line"></i> 發展趨勢</h4>
-            <p>自動駕駛等級正從L2向L3邁進，預計2025年更多車款將具備有條件的自動駕駛功能。台灣也積極發展自駕車測試場域。</p>
-          </div>
         </article>
       </div>
     </section>
@@ -453,44 +384,48 @@
         <div class="website-card">
           <h4>國內網站</h4>
           <ul>
-            <li><a href="https://www.mobile01.com/auto" target="_blank">Mobile01汽車版</a> - 車主討論區</li>
-            <li><a href="https://autos.yahoo.com.tw/" target="_blank">Yahoo奇摩汽車</a> - 新聞與試駕報導</li>
-            <li><a href="https://www.7car.tw/" target="_blank">七汽車網</a> - 台灣汽車資訊</li>
-            <li><a href="https://www.carnews.com/" target="_blank">車訊網</a> - 專業汽車媒體</li>
-            <li><a href="https://motor.u-car.com.tw/" target="_blank">U-CAR</a> - 新車與二手車資訊</li>
+            <!-- 修正 Mobile01 連結 -->
+            <li><a href="https://www.mobile01.com/category.php?id=4" target="_blank" rel="noopener noreferrer" class="external-link">Mobile01 汽車版 <i class="fas fa-external-link-alt"></i></a> - 台灣最大車主討論區</li>
+            <li><a href="https://autos.yahoo.com.tw/" target="_blank" rel="noopener noreferrer" class="external-link">Yahoo奇摩汽車 <i class="fas fa-external-link-alt"></i></a> - 新聞與試駕報導</li>
+            <li><a href="https://www.7car.tw/" target="_blank" rel="noopener noreferrer" class="external-link">七汽車網 <i class="fas fa-external-link-alt"></i></a> - 台灣汽車資訊</li>
+            <li><a href="https://www.carnews.com/" target="_blank" rel="noopener noreferrer" class="external-link">車訊網 <i class="fas fa-external-link-alt"></i></a> - 專業汽車媒體</li>
+            <li><a href="https://motor.u-car.com.tw/" target="_blank" rel="noopener noreferrer" class="external-link">U-CAR <i class="fas fa-external-link-alt"></i></a> - 新車與二手車資訊</li>
+            <li><a href="https://www.8891.com.tw/" target="_blank" rel="noopener noreferrer" class="external-link">8891汽車交易網 <i class="fas fa-external-link-alt"></i></a> - 台灣最大汽車交易平台</li>
           </ul>
         </div>
         
         <div class="website-card">
           <h4>國際網站</h4>
           <ul>
-            <li><a href="https://www.caranddriver.com/" target="_blank">Car and Driver</a> - 專業評測</li>
-            <li><a href="https://www.motortrend.com/" target="_blank">Motor Trend</a> - 汽車趨勢</li>
-            <li><a href="https://www.topgear.com/" target="_blank">Top Gear</a> - 英國汽車媒體</li>
-            <li><a href="https://www.edmunds.com/" target="_blank">Edmunds</a> - 美國購車指南</li>
-            <li><a href="https://www.kbb.com/" target="_blank">Kelley Blue Book</a> - 車輛估價權威</li>
+            <li><a href="https://www.caranddriver.com/" target="_blank" rel="noopener noreferrer" class="external-link">Car and Driver <i class="fas fa-external-link-alt"></i></a> - 專業評測</li>
+            <li><a href="https://www.motortrend.com/" target="_blank" rel="noopener noreferrer" class="external-link">Motor Trend <i class="fas fa-external-link-alt"></i></a> - 汽車趨勢</li>
+            <li><a href="https://www.topgear.com/" target="_blank" rel="noopener noreferrer" class="external-link">Top Gear <i class="fas fa-external-link-alt"></i></a> - 英國汽車媒體</li>
+            <li><a href="https://www.edmunds.com/" target="_blank" rel="noopener noreferrer" class="external-link">Edmunds <i class="fas fa-external-link-alt"></i></a> - 美國購車指南</li>
+            <!-- 修正 Kelley Blue Book 連結 -->
+            <li><a href="https://www.kbb.com/" target="_blank" rel="noopener noreferrer" class="external-link">Kelley Blue Book <i class="fas fa-external-link-alt"></i></a> - 美國車輛估價權威</li>
+            <li><a href="https://www.autoscout24.com/" target="_blank" rel="noopener noreferrer" class="external-link">AutoScout24 <i class="fas fa-external-link-alt"></i></a> - 歐洲最大汽車買賣平台</li>
           </ul>
         </div>
         
         <div class="website-card">
           <h4>實用工具網站</h4>
           <ul>
-            <li><a href="external_gasbuddy.html">GasBuddy</a> - 油價查詢</li>
-            <li><a href="external_twmaintain.html">汽車維修指南</a></li>
-            <li><a href="https://www.fueleconomy.gov/" target="_blank">Fuel Economy</a> - 油耗資訊</li>
-            <li><a href="https://www.nhtsa.gov/" target="_blank">NHTSA</a> - 安全評級</li>
-            <li><a href="https://www.iihs.org/" target="_blank">IIHS</a> - 撞擊測試結果</li>
+            <li><a href="https://www.fueleconomy.gov/" target="_blank" rel="noopener noreferrer" class="external-link">Fuel Economy <i class="fas fa-external-link-alt"></i></a> - 油耗資訊</li>
+            <li><a href="https://www.nhtsa.gov/" target="_blank" rel="noopener noreferrer" class="external-link">NHTSA <i class="fas fa-external-link-alt"></i></a> - 安全評級</li>
+            <li><a href="https://www.iihs.org/" target="_blank" rel="noopener noreferrer" class="external-link">IIHS <i class="fas fa-external-link-alt"></i></a> - 撞擊測試結果</li>
+            <li><a href="https://www.fuelly.com/" target="_blank" rel="noopener noreferrer" class="external-link">Fuelly <i class="fas fa-external-link-alt"></i></a> - 油耗追蹤工具</li>
+            <li><a href="https://repairpal.com/" target="_blank" rel="noopener noreferrer" class="external-link">RepairPal <i class="fas fa-external-link-alt"></i></a> - 維修估價工具</li>
           </ul>
         </div>
         
         <div class="website-card">
-          <h4>政府資源</h4>
+          <h4>政府與官方資源</h4>
           <ul>
-            <li><a href="https://www.mvdis.gov.tw/" target="_blank">監理服務網</a> - 牌照、駕照業務</li>
-            <li><a href="https://www.artc.org.tw/" target="_blank">車輛安全審驗中心</a></li>
-            <li><a href="https://www.car-safety.org.tw/" target="_blank">車輛安全資訊網</a></li>
-            <li><a href="https://www.epa.gov.tw/" target="_blank">環保署車輛資訊</a></li>
-            <li><a href="https://www.freeway.gov.tw/" target="_blank">高速公路局</a> - 即時路況</li>
+            <li><a href="https://www.mvdis.gov.tw/" target="_blank" rel="noopener noreferrer" class="external-link">監理服務網 <i class="fas fa-external-link-alt"></i></a> - 牌照、駕照業務</li>
+            <li><a href="https://www.artc.org.tw/" target="_blank" rel="noopener noreferrer" class="external-link">車輛安全審驗中心 <i class="fas fa-external-link-alt"></i></a></li>
+            <li><a href="https://www.freeway.gov.tw/" target="_blank" rel="noopener noreferrer" class="external-link">高速公路局 <i class="fas fa-external-link-alt"></i></a> - 即時路況</li>
+            <li><a href="https://www.thb.gov.tw/" target="_blank" rel="noopener noreferrer" class="external-link">公路總局 <i class="fas fa-external-link-alt"></i></a> - 交通資訊</li>
+            <li><a href="https://www.caa.gov.tw/" target="_blank" rel="noopener noreferrer" class="external-link">消保會 <i class="fas fa-external-link-alt"></i></a> - 消費者保護</li>
           </ul>
         </div>
       </div>
@@ -498,6 +433,12 @@
       <div class="note-box">
         <h4><i class="fas fa-external-link-alt"></i> 外部連結說明</h4>
         <p>點擊外部網站連結將會離開本網站，前往第三方網站。請注意第三方網站的隱私政策與使用條款。</p>
+        <p><strong>推薦理由：</strong></p>
+        <ul>
+          <li><strong>8891汽車交易網：</strong>台灣最大、最活躍的汽車交易平台，提供豐富的車源和交易資訊</li>
+          <li><strong>AutoScout24：</strong>歐洲最大的汽車買賣平台，適合尋找進口車或了解國際車市行情的用戶</li>
+          <li><strong>Kelley Blue Book：</strong>美國最權威的車輛估價網站，提供準確的二手車價格參考</li>
+        </ul>
       </div>
     </section>
     
@@ -509,10 +450,10 @@
 
   <footer>
     <div class="footer-links">
-      <a href="index.html">首頁</a> |
-      <a href="cars.html">車輛列表</a> |
-      <a href="knowledge.html">知識庫</a> |
-      <a href="contact.html">聯絡我們</a> |
+      <a href="index.html">首頁</a>
+      <a href="cars.html">車輛列表</a>
+      <a href="knowledge.html">知識庫</a>
+      <a href="contact.html">聯絡我們</a>
       <a href="partners.html">協力廠商</a>
     </div>
     <p>&copy; 2025 漢新二手車專賣</p>
